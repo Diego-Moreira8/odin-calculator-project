@@ -1,0 +1,20 @@
+body {
+  background-color: rgb(230, 230, 230);
+  color: rgb(28, 28, 28);
+}
+
+.display {
+  font-family: "Courier New", Courier, monospace;
+  background-color: rgb(243, 234, 216);
+  font-size: 2rem;
+  width: fit-content;
+  padding: 0.25rem 1rem;
+  border: 2px solid black;
+}
+
+button {
+  font-family: "Courier New", Courier, monospace;
+  width: 2rem;
+  height: 2rem;
+  margin: 0.25rem 1rem;
+}
