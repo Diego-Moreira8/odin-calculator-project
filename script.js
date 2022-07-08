@@ -1,3 +1,15 @@
+const display = document.querySelector(".display");
+let currentNumber = 0;
+const numberButtons = document.querySelectorAll(".number");
+
+// Add numbers to the display
+numberButtons.forEach((button) =>
+  button.addEventListener("click", (e) => {
+    display.innerText += e.target.innerText;
+    currentNumber = parseInt(display.innerText);
+  })
+);
+
 const sum = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
