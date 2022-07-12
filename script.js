@@ -4,16 +4,18 @@ const numberButtons = document.querySelectorAll(".number");
 
 // Add numbers to the display
 numberButtons.forEach((button) =>
-  button.addEventListener("click", (e) => {
-    display.innerText += e.target.innerText;
-    currentNumber = parseInt(display.innerText);
-  })
+  button.addEventListener("click", populateDisplay)
 );
 
 const sum = (x, y) => x + y;
 const subtract = (x, y) => x - y;
 const multiply = (x, y) => x * y;
 const divide = (x, y) => x / y;
+
+function populateDisplay(e) {
+  display.innerText += e.target.innerText;
+  currentNumber = parseInt(display.innerText);
+}
 
 function operate(operator, x, y) {
   switch (operator) {
