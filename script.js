@@ -1,11 +1,11 @@
-const display = document.querySelector(".display");
 let currentNumber = 0,
-  previousNumber = 0;
-let reset = true;
-let firstOperation = true;
-const numberButtons = document.querySelectorAll(".number");
-const clearButton = document.querySelector(".clear");
-const operatorsButtons = document.querySelectorAll(".operator");
+  previousNumber = 0,
+  reset = true,
+  firstOperation = true;
+const display = document.querySelector(".display"),
+  numberButtons = document.querySelectorAll(".number"),
+  clearButton = document.querySelector(".clear"),
+  operatorsButtons = document.querySelectorAll(".operator");
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
