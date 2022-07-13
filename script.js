@@ -2,6 +2,7 @@ const display = document.querySelector(".display");
 let currentNumber = 0,
   previousNumber = 0;
 let reset = true;
+let firstOperation = true;
 const numberButtons = document.querySelectorAll(".number");
 const clearButton = document.querySelector(".clear");
 const operatorsButtons = document.querySelectorAll(".operator");
@@ -27,6 +28,7 @@ function clearDisplay() {
   display.innerText = "";
   currentNumber = 0;
   previousNumber = 0;
+  firstOperation = true;
 }
 
 function operate(e) {
@@ -36,13 +38,27 @@ function operate(e) {
       result = previousNumber + currentNumber;
       break;
     case "subtract":
-      result = previousNumber - currentNumber;
+      if (firstOperation) {
+        result = currentNumber;
+        firstOperation = false;
+      } else {
+        result = previousNumber - currentNumber;
+      }
       break;
     case "multiply":
+      if (firstOperation) {
+        previousNumber = 1;
+        firstOperation = false;
+      }
       result = previousNumber * currentNumber;
       break;
     case "divide":
-      result = previousNumber / currentNumber;
+      if (firstOperation) {
+        result = currentNumber;
+        firstOperation = false;
+      } else {
+        result = previousNumber / currentNumber;
+      }
       break;
   }
   display.innerText = result;
