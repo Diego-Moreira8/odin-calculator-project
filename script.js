@@ -78,13 +78,12 @@ function operate(e) {
           result = previousNumber / currentNumber;
           break;
       }
+      firstOperation = true;
+      lastOperator = "";
+      currentNumber = 0;
+      break;
   }
   display.innerText = result;
   previousNumber = result;
   reset = true;
 }
-
-// const sum = (x, y) => x + y;
-// const subtract = (x, y) => x - y;
-// const multiply = (x, y) => x * y;
-// const divide = (x, y) => x / y;
