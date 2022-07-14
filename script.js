@@ -1,7 +1,8 @@
 let currentNumber = 0,
   previousNumber = 0,
   reset = true,
-  firstOperation = true;
+  firstOperation = true,
+  lastOperator = "";
 const display = document.querySelector(".display"),
   numberButtons = document.querySelectorAll(".number"),
   clearButton = document.querySelector(".clear"),
@@ -33,6 +34,8 @@ function clearDisplay() {
 
 function operate(e) {
   let result = 0;
+  lastOperator =
+    e.target.classList[1] === "equals" ? lastOperator : e.target.classList[1];
   switch (e.target.classList[1]) {
     case "sum":
       result = previousNumber + currentNumber;
@@ -60,6 +63,21 @@ function operate(e) {
         result = previousNumber / currentNumber;
       }
       break;
+    case "equals":
+      switch (lastOperator) {
+        case "sum":
+          result = previousNumber + currentNumber;
+          break;
+        case "subtract":
+          result = previousNumber - currentNumber;
+          break;
+        case "multiply":
+          result = previousNumber * currentNumber;
+          break;
+        case "divide":
+          result = previousNumber / currentNumber;
+          break;
+      }
   }
   display.innerText = result;
   previousNumber = result;
