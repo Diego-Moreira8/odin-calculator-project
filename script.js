@@ -3,10 +3,14 @@ let currentNumber = 0,
   reset = true,
   firstOperation = true,
   lastOperator = "";
+
 const display = document.querySelector(".display"),
   numberButtons = document.querySelectorAll(".number"),
   clearButton = document.querySelector(".clear"),
-  operatorsButtons = document.querySelectorAll(".operator");
+  sumButton = document.querySelector(".sum"),
+  subtractButton = document.querySelector(".subtract"),
+  multiplyButton = document.querySelector(".multiply"),
+  divideButton = document.querySelector(".divide");
 
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
@@ -14,7 +18,10 @@ numberButtons.forEach((button) =>
 
 clearButton.addEventListener("click", clearDisplay);
 
-operatorsButtons.forEach((button) => button.addEventListener("click", operate));
+sumButton.addEventListener("click");
+subtractButton.addEventListener("click");
+multiplyButton.addEventListener("click");
+divideButton.addEventListener("click");
 
 function populateDisplay(e) {
   if (reset) {
@@ -26,7 +33,7 @@ function populateDisplay(e) {
 }
 
 function clearDisplay() {
-  display.innerText = "";
+  display.innerText = "0";
   currentNumber = 0;
   previousNumber = 0;
   firstOperation = true;
@@ -79,7 +86,6 @@ function operate(e) {
           break;
       }
       firstOperation = true;
-      lastOperator = "";
       currentNumber = 0;
       break;
   }
