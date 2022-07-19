@@ -16,6 +16,8 @@ const display = document.querySelector(".display"),
   divideButton = document.querySelector(".divide"),
   equalsButton = document.querySelector(".equals");
 
+display.innerText = 0; // Initialize display
+
 // Event Listeners:
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
@@ -31,6 +33,10 @@ equalsButton.addEventListener("click", equals);
 function populateDisplay(e) {
   if (currentNumber === 0) {
     display.innerText = "";
+  } else if (lastOperator === "equals") {
+    display.innerText = "";
+    lastOperator = "";
+    pointButton.removeAttribute("disabled");
   }
   display.innerText += e.target.innerText;
   currentNumber = Number(display.innerText);
@@ -46,6 +52,7 @@ function clearDisplay() {
   currentNumber = 0;
   previousNumber = 0;
   firstOperation = true;
+  pointButton.removeAttribute("disabled");
 }
 
 function sum() {
@@ -122,4 +129,3 @@ function equals() {
   lastOperator = "equals";
   display.innerText = result;
 }
-// tenta arrumar esse ponto ae
