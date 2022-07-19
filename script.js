@@ -56,8 +56,17 @@ function clearDisplay() {
 }
 
 function sum() {
-  display.innerText = previousNumber + currentNumber;
-  previousNumber += currentNumber;
+  if (!firstOperation) {
+    switch (lastOperator) {
+      case "subtract":
+        display.innerText = previousNumber - currentNumber;
+        previousNumber -= currentNumber;
+        break;
+    }
+  } else {
+    display.innerText = previousNumber + currentNumber;
+    previousNumber += currentNumber;
+  }
   currentNumber = 0;
   currentOperator.innerText = "+";
   firstOperation = false;
