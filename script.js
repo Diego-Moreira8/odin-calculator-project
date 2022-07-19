@@ -1,23 +1,34 @@
+// Aux
 let currentNumber = 0,
   previousNumber = 0,
   reset = true,
   firstOperation = true,
   lastOperator = "";
+
+// Buttons
 const display = document.querySelector(".display"),
+  currentOperator = document.querySelector(".current-operator"),
   numberButtons = document.querySelectorAll(".number"),
   clearButton = document.querySelector(".clear"),
-  operatorsButtons = document.querySelectorAll(".operator");
+  sumButton = document.querySelector(".sum"),
+  subtractButton = document.querySelector(".subtract"),
+  multiplyButton = document.querySelector(".multiply"),
+  divideButton = document.querySelector(".divide"),
+  equalsButton = document.querySelector(".equals");
 
+// Event Listeners:
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
 );
-
 clearButton.addEventListener("click", clearDisplay);
-
-operatorsButtons.forEach((button) => button.addEventListener("click", operate));
+sumButton.addEventListener("click", sum);
+subtractButton.addEventListener("click", subtract);
+multiplyButton.addEventListener("click", multiply);
+divideButton.addEventListener("click", divide);
+equalsButton.addEventListener("click", equals);
 
 function populateDisplay(e) {
-  if (reset) {
+  if (reset || currentNumber === 0) {
     display.innerText = "";
     reset = false;
   }
@@ -26,64 +37,79 @@ function populateDisplay(e) {
 }
 
 function clearDisplay() {
-  display.innerText = "";
+  display.innerText = "0";
   currentNumber = 0;
   previousNumber = 0;
   firstOperation = true;
 }
 
-function operate(e) {
+function sum() {
+  display.innerText = previousNumber + currentNumber;
+  previousNumber += currentNumber;
+  currentNumber = 0;
+  currentOperator.innerText = "+";
+  firstOperation = false;
+  lastOperator = "sum";
+}
+
+function subtract() {
+  if (firstOperation) {
+    previousNumber = currentNumber;
+  } else {
+    previousNumber -= currentNumber;
+    display.innerText = previousNumber;
+  }
+  currentNumber = 0;
+  currentOperator.innerText = "-";
+  firstOperation = false;
+  lastOperator = "subtract";
+}
+
+function multiply() {
+  if (firstOperation) {
+    previousNumber = currentNumber;
+  } else {
+    previousNumber *= currentNumber;
+    display.innerText = previousNumber;
+  }
+  currentNumber = 0;
+  currentOperator.innerText = "x";
+  firstOperation = false;
+  lastOperator = "multiply";
+}
+
+function divide() {
+  if (firstOperation) {
+    previousNumber = currentNumber;
+  } else {
+    previousNumber /= currentNumber;
+    display.innerText = previousNumber;
+  }
+  currentNumber = 0;
+  currentOperator.innerText = "÷";
+  firstOperation = false;
+  lastOperator = "divide";
+}
+
+function equals() {
   let result = 0;
-  lastOperator =
-    e.target.classList[1] === "equals" ? lastOperator : e.target.classList[1];
-  switch (e.target.classList[1]) {
+  switch (lastOperator) {
     case "sum":
       result = previousNumber + currentNumber;
       break;
     case "subtract":
-      if (firstOperation) {
-        result = currentNumber;
-        firstOperation = false;
-      } else {
-        result = previousNumber - currentNumber;
-      }
+      result = previousNumber - currentNumber;
       break;
     case "multiply":
-      if (firstOperation) {
-        previousNumber = 1;
-        firstOperation = false;
-      }
       result = previousNumber * currentNumber;
       break;
     case "divide":
-      if (firstOperation) {
-        result = currentNumber;
-        firstOperation = false;
-      } else {
-        result = previousNumber / currentNumber;
-      }
-      break;
-    case "equals":
-      switch (lastOperator) {
-        case "sum":
-          result = previousNumber + currentNumber;
-          break;
-        case "subtract":
-          result = previousNumber - currentNumber;
-          break;
-        case "multiply":
-          result = previousNumber * currentNumber;
-          break;
-        case "divide":
-          result = previousNumber / currentNumber;
-          break;
-      }
-      firstOperation = true;
-      lastOperator = "";
-      currentNumber = 0;
+      result = previousNumber / currentNumber;
       break;
   }
+  currentNumber = 0;
+  previousNumber = 0;
+  firstOperation = true;
+  lastOperator = "equals";
   display.innerText = result;
-  previousNumber = result;
-  reset = true;
 }
