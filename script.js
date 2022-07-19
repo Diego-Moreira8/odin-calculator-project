@@ -20,7 +20,7 @@ const display = document.querySelector(".display"),
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
 );
-pointButton.addEventListener("click", populateDisplay);
+pointButton.addEventListener("click", insertPoint);
 clearButton.addEventListener("click", clearDisplay);
 sumButton.addEventListener("click", sum);
 subtractButton.addEventListener("click", subtract);
@@ -34,6 +34,11 @@ function populateDisplay(e) {
   }
   display.innerText += e.target.innerText;
   currentNumber = Number(display.innerText);
+}
+
+function insertPoint(e) {
+  populateDisplay(e);
+  e.target.disabled = true;
 }
 
 function clearDisplay() {
@@ -50,6 +55,7 @@ function sum() {
   currentOperator.innerText = "+";
   firstOperation = false;
   lastOperator = "sum";
+  pointButton.removeAttribute("disabled");
 }
 
 function subtract() {
@@ -63,6 +69,7 @@ function subtract() {
   currentOperator.innerText = "-";
   firstOperation = false;
   lastOperator = "subtract";
+  pointButton.removeAttribute("disabled");
 }
 
 function multiply() {
@@ -76,6 +83,7 @@ function multiply() {
   currentOperator.innerText = "x";
   firstOperation = false;
   lastOperator = "multiply";
+  pointButton.removeAttribute("disabled");
 }
 
 function divide() {
@@ -89,6 +97,7 @@ function divide() {
   currentOperator.innerText = "÷";
   firstOperation = false;
   lastOperator = "divide";
+  pointButton.removeAttribute("disabled");
 }
 
 function equals() {
@@ -113,3 +122,4 @@ function equals() {
   lastOperator = "equals";
   display.innerText = result;
 }
+// tenta arrumar esse ponto ae
