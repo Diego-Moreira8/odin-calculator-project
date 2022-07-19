@@ -1,7 +1,6 @@
 // Aux
 let currentNumber = 0,
   previousNumber = 0,
-  reset = true,
   firstOperation = true,
   lastOperator = "";
 
@@ -9,6 +8,7 @@ let currentNumber = 0,
 const display = document.querySelector(".display"),
   currentOperator = document.querySelector(".current-operator"),
   numberButtons = document.querySelectorAll(".number"),
+  pointButton = document.querySelector(".point"),
   clearButton = document.querySelector(".clear"),
   sumButton = document.querySelector(".sum"),
   subtractButton = document.querySelector(".subtract"),
@@ -20,6 +20,7 @@ const display = document.querySelector(".display"),
 numberButtons.forEach((button) =>
   button.addEventListener("click", populateDisplay)
 );
+pointButton.addEventListener("click", populateDisplay);
 clearButton.addEventListener("click", clearDisplay);
 sumButton.addEventListener("click", sum);
 subtractButton.addEventListener("click", subtract);
@@ -28,12 +29,11 @@ divideButton.addEventListener("click", divide);
 equalsButton.addEventListener("click", equals);
 
 function populateDisplay(e) {
-  if (reset || currentNumber === 0) {
+  if (currentNumber === 0) {
     display.innerText = "";
-    reset = false;
   }
   display.innerText += e.target.innerText;
-  currentNumber = parseInt(display.innerText);
+  currentNumber = Number(display.innerText);
 }
 
 function clearDisplay() {
@@ -107,7 +107,7 @@ function equals() {
       result = previousNumber / currentNumber;
       break;
   }
-  currentNumber = 0;
+  currentNumber = result;
   previousNumber = 0;
   firstOperation = true;
   lastOperator = "equals";
