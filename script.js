@@ -5,7 +5,7 @@ let currentNumber = 0,
   lastOperator = "";
 
 // Buttons
-const display = document.querySelector(".display"),
+const display = document.querySelector(".digits"),
   currentOperator = document.querySelector(".current-operator"),
   numberButtons = document.querySelectorAll(".number"),
   pointButton = document.querySelector(".point"),
@@ -53,6 +53,7 @@ function clearDisplay() {
   previousNumber = 0;
   firstOperation = true;
   pointButton.removeAttribute("disabled");
+  currentOperator.innerText = "";
 }
 
 function makeExpression() {

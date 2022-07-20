@@ -1,25 +1,28 @@
 body {
   background-color: rgb(230, 230, 230);
   color: rgb(28, 28, 28);
-  width: 10rem;
   margin: 2rem auto;
 }
 
 .display {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   font-family: monospace;
-  background-color: rgb(243, 234, 216);
-  font-size: 2rem;
+  color: lightgreen;
+  background-color: rgb(39, 39, 39);
+  font-size: 1rem;
   text-align: end;
-  width: inherit;
+  width: 10rem;
   height: 3rem;
-  padding: 0.25rem 1rem;
+  padding: 0rem 1rem;
   border: 2px solid black;
   box-sizing: border-box;
 }
 
 .buttons {
   display: flex;
-  width: inherit;
+  width: 10rem;
   flex-wrap: wrap;
 }
 
