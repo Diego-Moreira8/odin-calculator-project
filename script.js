@@ -55,14 +55,30 @@ function clearDisplay() {
   pointButton.removeAttribute("disabled");
 }
 
+function makeExpression() {
+  switch (lastOperator) {
+    case "sum":
+      display.innerText = previousNumber + currentNumber;
+      previousNumber += currentNumber;
+      break;
+    case "subtract":
+      display.innerText = previousNumber - currentNumber;
+      previousNumber -= currentNumber;
+      break;
+    case "multiply":
+      display.innerText = previousNumber * currentNumber;
+      previousNumber *= currentNumber;
+      break;
+    case "divide":
+      display.innerText = previousNumber / currentNumber;
+      previousNumber /= currentNumber;
+      break;
+  }
+}
+
 function sum() {
   if (!firstOperation) {
-    switch (lastOperator) {
-      case "subtract":
-        display.innerText = previousNumber - currentNumber;
-        previousNumber -= currentNumber;
-        break;
-    }
+    makeExpression();
   } else {
     display.innerText = previousNumber + currentNumber;
     previousNumber += currentNumber;
@@ -75,11 +91,10 @@ function sum() {
 }
 
 function subtract() {
-  if (firstOperation) {
-    previousNumber = currentNumber;
+  if (!firstOperation) {
+    makeExpression();
   } else {
-    previousNumber -= currentNumber;
-    display.innerText = previousNumber;
+    previousNumber = currentNumber;
   }
   currentNumber = 0;
   currentOperator.innerText = "-";
@@ -89,11 +104,10 @@ function subtract() {
 }
 
 function multiply() {
-  if (firstOperation) {
-    previousNumber = currentNumber;
+  if (!firstOperation) {
+    makeExpression();
   } else {
-    previousNumber *= currentNumber;
-    display.innerText = previousNumber;
+    previousNumber = currentNumber;
   }
   currentNumber = 0;
   currentOperator.innerText = "x";
@@ -103,11 +117,10 @@ function multiply() {
 }
 
 function divide() {
-  if (firstOperation) {
-    previousNumber = currentNumber;
+  if (!firstOperation) {
+    makeExpression();
   } else {
-    previousNumber /= currentNumber;
-    display.innerText = previousNumber;
+    previousNumber = currentNumber;
   }
   currentNumber = 0;
   currentOperator.innerText = "÷";
@@ -117,24 +130,10 @@ function divide() {
 }
 
 function equals() {
-  let result = 0;
-  switch (lastOperator) {
-    case "sum":
-      result = previousNumber + currentNumber;
-      break;
-    case "subtract":
-      result = previousNumber - currentNumber;
-      break;
-    case "multiply":
-      result = previousNumber * currentNumber;
-      break;
-    case "divide":
-      result = previousNumber / currentNumber;
-      break;
-  }
-  currentNumber = result;
+  makeExpression();
+  currentNumber = Number(display.innerText);
   previousNumber = 0;
   firstOperation = true;
   lastOperator = "equals";
-  display.innerText = result;
+  currentOperator.innerText = "=";
 }
