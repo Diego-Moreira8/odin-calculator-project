@@ -1,28 +1,46 @@
 body {
   background-color: rgb(230, 230, 230);
   color: rgb(28, 28, 28);
-  margin: 2rem auto;
+  height: 100vh;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+main {
+  width: 10rem;
 }
 
 .display {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-flow: column;
+  justify-content: center;
   font-family: monospace;
   color: lightgreen;
   background-color: rgb(39, 39, 39);
-  font-size: 1rem;
-  text-align: end;
-  width: 10rem;
+  width: inherit;
   height: 3rem;
   padding: 0rem 1rem;
   border: 2px solid black;
   box-sizing: border-box;
 }
 
+.display .history {
+  font-size: 0.5rem;
+  text-align: left;
+}
+
+.display .current {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 2rem;
+}
+
 .buttons {
   display: flex;
-  width: 10rem;
+  width: inherit;
   flex-wrap: wrap;
 }
 
@@ -31,6 +49,6 @@ button {
   width: calc(100% / 3);
   height: 2rem;
   font-family: monospace;
-  border: 1px solid gray;
+  border: 0.5px solid gray;
   border-radius: 0;
 }
