@@ -46,8 +46,7 @@ main {
 
 button {
   box-sizing: border-box;
-  width: calc(100% / 3);
-  height: 2rem;
+  width: calc(100% / 5);
   font-family: monospace;
   border: 0.5px solid gray;
   border-radius: 0;

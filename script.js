@@ -7,7 +7,6 @@ let currentNumber = 0,
 // Buttons
 const display = document.querySelector(".digits"),
   historyDisplay = document.querySelector(".history"),
-  currentOperator = document.querySelector(".current-operator"),
   numberButtons = document.querySelectorAll(".number"),
   pointButton = document.querySelector(".point"),
   clearButton = document.querySelector(".clear"),
@@ -88,7 +87,6 @@ function sum() {
     previousNumber += currentNumber;
   }
   currentNumber = 0;
-  // currentOperator.innerText = "+";
   firstOperation = false;
   lastOperator = "sum";
   pointButton.removeAttribute("disabled");
@@ -102,7 +100,6 @@ function subtract() {
     previousNumber = currentNumber;
   }
   currentNumber = 0;
-  // currentOperator.innerText = "-";
   firstOperation = false;
   lastOperator = "subtract";
   pointButton.removeAttribute("disabled");
@@ -116,7 +113,6 @@ function multiply() {
     previousNumber = currentNumber;
   }
   currentNumber = 0;
-  // currentOperator.innerText = "x";
   firstOperation = false;
   lastOperator = "multiply";
   pointButton.removeAttribute("disabled");
@@ -130,7 +126,6 @@ function divide() {
     previousNumber = currentNumber;
   }
   currentNumber = 0;
-  // currentOperator.innerText = "÷";
   firstOperation = false;
   lastOperator = "divide";
   pointButton.removeAttribute("disabled");
@@ -143,5 +138,4 @@ function equals() {
   previousNumber = 0;
   firstOperation = true;
   lastOperator = "equals";
-  // currentOperator.innerText = "=";
 }
