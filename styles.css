@@ -9,45 +9,64 @@ body {
 }
 
 main {
-  width: 10rem;
+  width: 30rem;
+  height: 80vh;
 }
 
 .display {
   display: flex;
   flex-flow: column;
-  justify-content: center;
+  justify-content: space-between;
   font-family: monospace;
   color: lightgreen;
   background-color: rgb(39, 39, 39);
-  width: inherit;
-  height: 3rem;
-  padding: 0rem 1rem;
+  padding: 1rem;
   border: 2px solid black;
   box-sizing: border-box;
 }
 
 .display .history {
-  font-size: 0.5rem;
+  font-size: 1rem;
   text-align: left;
 }
 
 .display .current {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 2rem;
+  text-align: end;
+  font-size: 5rem;
 }
 
 .buttons {
+  background-color: white;
   display: flex;
-  width: inherit;
+  flex-wrap: wrap;
+  flex-flow: row;
+}
+
+.number-buttons {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.operator-buttons {
+  display: flex;
   flex-wrap: wrap;
 }
 
 button {
+  font-size: 3rem;
   box-sizing: border-box;
-  width: calc(100% / 5);
+  background-color: rgb(24, 24, 24);
+  color: white;
   font-family: monospace;
-  border: 0.5px solid gray;
+  padding: 0;
+  border: 0.5px solid orange;
   border-radius: 0;
+  margin: 0;
+}
+
+.number-buttons button {
+  width: calc(100% / 3);
+}
+.operator-buttons button {
+  width: calc(100% / 2);
 }
