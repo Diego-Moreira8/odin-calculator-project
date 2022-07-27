@@ -31,7 +31,7 @@ divideButton.addEventListener("click", divide);
 equalsButton.addEventListener("click", equals);
 
 function populateDisplay(e) {
-  if (currentNumber === 0) {
+  if (currentNumber === 0 && lastOperator !== "equals") {
     display.innerText = "";
   } else if (lastOperator === "equals") {
     display.innerText = "";
@@ -59,10 +59,10 @@ function clearDisplay() {
 
 function sum() {
   historyDisplay.innerText += ` ${currentNumber} +`;
+  lastOperator = "sum";
   operate();
   currentNumber = 0;
   firstOperation = false;
-  lastOperator = "sum";
   pointButton.removeAttribute("disabled");
 }
 
