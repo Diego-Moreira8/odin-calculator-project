@@ -35,6 +35,7 @@ function populateDisplay(e) {
     display.innerText = "";
   } else if (lastOperator === "equals") {
     display.innerText = "";
+    historyDisplay.innerText = "";
     lastOperator = "";
     pointButton.removeAttribute("disabled");
   }
@@ -54,38 +55,11 @@ function clearDisplay() {
   previousNumber = 0;
   firstOperation = true;
   pointButton.removeAttribute("disabled");
-  currentOperator.innerText = "";
-}
-
-function operate() {
-  switch (lastOperator) {
-    case "sum":
-      display.innerText = previousNumber + currentNumber;
-      previousNumber += currentNumber;
-      break;
-    case "subtract":
-      display.innerText = previousNumber - currentNumber;
-      previousNumber -= currentNumber;
-      break;
-    case "multiply":
-      display.innerText = previousNumber * currentNumber;
-      previousNumber *= currentNumber;
-      break;
-    case "divide":
-      display.innerText = previousNumber / currentNumber;
-      previousNumber /= currentNumber;
-      break;
-  }
 }
 
 function sum() {
   historyDisplay.innerText += ` ${currentNumber} +`;
-  if (!firstOperation) {
-    operate();
-  } else {
-    display.innerText = previousNumber + currentNumber;
-    previousNumber += currentNumber;
-  }
+  operate();
   currentNumber = 0;
   firstOperation = false;
   lastOperator = "sum";
@@ -138,4 +112,25 @@ function equals() {
   previousNumber = 0;
   firstOperation = true;
   lastOperator = "equals";
+}
+
+function operate() {
+  switch (lastOperator) {
+    case "sum":
+      display.innerText = previousNumber + currentNumber;
+      previousNumber += currentNumber;
+      break;
+    case "subtract":
+      display.innerText = previousNumber - currentNumber;
+      previousNumber -= currentNumber;
+      break;
+    case "multiply":
+      display.innerText = previousNumber * currentNumber;
+      previousNumber *= currentNumber;
+      break;
+    case "divide":
+      display.innerText = previousNumber / currentNumber;
+      previousNumber /= currentNumber;
+      break;
+  }
 }
