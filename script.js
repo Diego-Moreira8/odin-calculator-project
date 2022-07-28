@@ -2,7 +2,8 @@
 let currentNumber = 0,
   previousNumber = 0,
   firstOperation = true,
-  lastOperator = "";
+  lastOperator = "",
+  digitAmount = 0;
 
 // Buttons
 const display = document.querySelector(".digits"),
@@ -31,16 +32,19 @@ divideButton.addEventListener("click", divide);
 equalsButton.addEventListener("click", equals);
 
 function populateDisplay(e) {
-  if (currentNumber === 0 && lastOperator !== "equals") {
-    display.innerText = "";
-  } else if (lastOperator === "equals") {
-    display.innerText = "";
-    historyDisplay.innerText = "";
-    lastOperator = "";
-    pointButton.removeAttribute("disabled");
+  if (digitAmount <= 8) {
+    if (currentNumber === 0 && lastOperator !== "equals") {
+      display.innerText = "";
+    } else if (lastOperator === "equals") {
+      display.innerText = "";
+      historyDisplay.innerText = "";
+      lastOperator = "";
+      pointButton.removeAttribute("disabled");
+    }
+    display.innerText += e.target.innerText;
+    currentNumber = Number(display.innerText);
+    digitAmount++;
   }
-  display.innerText += e.target.innerText;
-  currentNumber = Number(display.innerText);
 }
 
 function insertPoint(e) {
@@ -63,6 +67,7 @@ function sum() {
   operate();
   currentNumber = 0;
   firstOperation = false;
+  digitAmount = 0;
   pointButton.removeAttribute("disabled");
 }
 
@@ -76,6 +81,7 @@ function subtract() {
   currentNumber = 0;
   firstOperation = false;
   lastOperator = "subtract";
+  digitAmount = 0;
   pointButton.removeAttribute("disabled");
 }
 
@@ -89,6 +95,7 @@ function multiply() {
   currentNumber = 0;
   firstOperation = false;
   lastOperator = "multiply";
+  digitAmount = 0;
   pointButton.removeAttribute("disabled");
 }
 
@@ -102,6 +109,7 @@ function divide() {
   currentNumber = 0;
   firstOperation = false;
   lastOperator = "divide";
+  digitAmount = 0;
   pointButton.removeAttribute("disabled");
 }
 
@@ -111,6 +119,7 @@ function equals() {
   currentNumber = Number(display.innerText);
   previousNumber = 0;
   firstOperation = true;
+  digitAmount = 0;
   lastOperator = "equals";
 }
 
