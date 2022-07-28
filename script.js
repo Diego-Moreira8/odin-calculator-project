@@ -1,4 +1,4 @@
-// Aux
+// Helpers
 let currentNumber = 0,
   previousNumber = 0,
   firstOperation = true,
@@ -32,7 +32,7 @@ divideButton.addEventListener("click", divide);
 equalsButton.addEventListener("click", equals);
 
 function populateDisplay(e) {
-  if (digitAmount <= 8) {
+  if (digitAmount < 8) {
     if (currentNumber === 0 && lastOperator !== "equals") {
       display.innerText = "";
     } else if (lastOperator === "equals") {
@@ -55,8 +55,7 @@ function insertPoint(e) {
 function clearDisplay() {
   historyDisplay.innerText = "";
   display.innerText = "0";
-  currentNumber = 0;
-  previousNumber = 0;
+  resetHelpers();
   firstOperation = true;
   pointButton.removeAttribute("disabled");
 }
@@ -142,4 +141,11 @@ function operate() {
       previousNumber /= currentNumber;
       break;
   }
+}
+
+function resetHelpers() {
+  currentNumber = 0;
+  previousNumber = 0;
+  lastOperator = "";
+  digitAmount = 0;
 }
