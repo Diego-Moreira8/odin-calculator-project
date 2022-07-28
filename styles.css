@@ -93,17 +93,23 @@ button {
 }
 
 footer {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
   font-family: "Century Gothic", sans-serif;
   padding: 1rem;
   text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 0.5rem;
 }
 
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
 a {
-  color: var(--light-text);
   color: var(--jungle-green);
 }
 
