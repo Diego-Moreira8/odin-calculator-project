@@ -85,7 +85,7 @@ function subtract() {
 }
 
 function multiply() {
-  historyDisplay.innerText += ` ${currentNumber} x`;
+  historyDisplay.innerText += ` ${currentNumber} ×`;
   if (!firstOperation) {
     operate();
   } else {
