@@ -1,118 +1,114 @@
 :root {
-  --black: #0c1618;
-  --jungle-green: #004643;
-  --cornsilk: #faf4d3;
-  --gold: #d1ac00;
-  --peach: #f6be9a;
-  /* Thanks to https://coolors.co */
-}
-
-body {
-  background-color: var(--peach);
-  color: var(--black);
-  height: 100vh;
-  display: flex;
-  flex-flow: column;
-  align-items: center;
-  justify-content: space-between;
-}
-
-main {
-  width: 20rem;
-  padding: 2rem 1rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background-color: rgba(255, 255, 255, 0.5);
-  border-radius: 1rem;
-  box-shadow: 0px 0px 70px 0px rgb(0 0 0 / 15%);
-}
-
-.display {
-  display: flex;
-  flex-flow: column;
-  justify-content: space-between;
-  font-family: monospace;
-  color: var(--black);
-  background-color: var(--cornsilk);
-  padding: 1rem;
-  border-radius: 1rem;
-  box-sizing: border-box;
-  margin-bottom: 1rem;
-}
-
-.display .history {
-  height: 1rem;
-  font-size: 1rem;
-  text-align: left;
-}
-
-.display .current {
-  text-align: end;
-  font-size: 3.2rem;
-}
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  flex-flow: column;
-}
-
-.number-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.operator-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  --window-border-dark-tone: #0065cd;
+  --window-border-medium-tone: #0465ff;
+  --window-border-light-tone: #2a8aff;
+  --app-bgc: #e7e9d2;
+  --danger: #c13e0d;
 }
 
 button {
-  font-size: 3rem;
-  box-sizing: border-box;
+  font-size: 1rem;
+  border-radius: 4px;
+}
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  height: 100vh;
+  background: center / cover no-repeat url("./images/win-xp-wallpaper.webp");
+}
+
+.window {
+  background-color: var(--app-bgc);
+  border: 3px solid var(--window-border-dark-tone);
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin: 1rem auto;
+  max-width: 250px;
+}
+
+.window-header {
+  background: linear-gradient(
+    var(--window-border-light-tone) 0%,
+    var(--window-border-dark-tone) 20%,
+    var(--window-border-medium-tone) 100%
+  );
   color: white;
-  font-family: monospace;
-  padding: 0;
-  border: none;
-  border: 1px solid var(--peach);
-  border-radius: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 0.2rem;
+}
+
+.title-wrap {
+  display: flex;
+  gap: 4px;
+}
+
+h1 {
+  font-size: 1rem;
   margin: 0;
 }
 
-.number-buttons button {
-  background-color: var(--jungle-green);
-  width: calc(100% / 3.25);
-}
-.operator-buttons button {
-  background-color: var(--gold);
-  color: var(--black);
-  width: calc(100% / 3.25);
-}
-
-footer {
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  font-family: "Century Gothic", sans-serif;
-  padding: 1rem;
-  text-align: center;
-  gap: 0.5rem;
+.window-controls button {
+  --size: 1.5rem;
+  width: var(--size);
+  height: var(--size);
+  border: 2px solid white;
+  padding: 0;
+  color: white;
+  font-weight: bold;
 }
 
-.footer-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1.5rem;
+.minimize,
+.maximize {
+  background-color: var(--window-border-dark-tone);
 }
 
-a {
-  color: var(--jungle-green);
+.close {
+  background-color: var(--danger);
 }
 
-path {
-  fill: var(--jungle-green);
+.window-content {
+  padding: 0.5rem;
+}
+
+.display {
+  background-color: white;
+  text-align: right;
+  border: 1px solid grey;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+}
+
+.calc-btns {
+  margin-top: 1rem;
+}
+
+.first-btns-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+}
+
+.empty-square {
+  --size: 1.5rem;
+  width: var(--size);
+  height: var(--size);
+  margin-left: 0.25rem;
+  border: 4px solid gray;
+  border-right: 4px solid white;
+  border-bottom: 4px solid white;
+}
+
+.calc-btns button {
+  background-color: white;
+  border: 1px solid black;
+  height: 2rem;
+}
+
+.btns-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25rem;
+  margin-top: 0.25rem;
 }
