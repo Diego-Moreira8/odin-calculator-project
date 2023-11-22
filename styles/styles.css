@@ -1,0 +1,90 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding-top: 1rem;
+  height: calc(100vh - 1rem);
+  background: center/cover no-repeat url("../images/win-xp-wallpaper.webp");
+}
+body button {
+  font-size: 1rem;
+  border-radius: 4px;
+  font-family: inherit;
+}
+body .window {
+  background-color: #e7e9d2;
+  border: 3px solid #0065cd;
+  border-radius: 0.5rem 0.5rem 0 0;
+  margin: 0 auto;
+  max-width: 250px;
+}
+body .window .window-header {
+  background: linear-gradient(#2a8aff 0%, #0065cd 20%, #0465ff 100%);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding: 0.2rem;
+}
+body .window .window-header .title-wrap {
+  display: flex;
+  gap: 0.2rem;
+}
+body .window .window-header .title-wrap h1 {
+  font-size: 1rem;
+  margin: 0;
+}
+body .window .window-header .window-controls button {
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid white;
+  padding: 0;
+  color: white;
+  font-weight: bold;
+}
+body .window .window-header .minimize,
+body .window .window-header .maximize {
+  background-color: #0065cd;
+}
+body .window .window-header .close {
+  background-color: #c13e0d;
+}
+body .window .window-content {
+  padding: 0.5rem;
+}
+body .window .window-content .display {
+  background-color: white;
+  text-align: right;
+  border: 1px solid grey;
+  padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+}
+body .window .window-content .calc-btns {
+  margin-top: 1rem;
+}
+body .window .window-content .calc-btns button {
+  background-color: white;
+  border: 1px solid black;
+  height: 2rem;
+}
+body .window .window-content .calc-btns .first-btns-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.25rem;
+}
+body .window .window-content .calc-btns .first-btns-row .empty-square {
+  width: 1.5rem;
+  height: 1.5rem;
+  margin-left: 0.25rem;
+  border-top: 4px solid gray;
+  border-right: 4px solid white;
+  border-bottom: 4px solid white;
+  border-left: 4px solid gray;
+}
+body .window .window-content .calc-btns .btns-grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 0.25rem;
+  margin-top: 0.25rem;
+}
+
+/*# sourceMappingURL=styles.css.map */

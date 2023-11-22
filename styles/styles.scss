@@ -1,0 +1,117 @@
+$window-border-dark-tone: #0065cd;
+$window-border-medium-tone: #0465ff;
+$window-border-light-tone: #2a8aff;
+$app-bgc: #e7e9d2;
+$danger: #c13e0d;
+
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding-top: 1rem;
+  height: calc(100vh - 1rem);
+  background: center / cover no-repeat url("../images/win-xp-wallpaper.webp");
+
+  button {
+    font-size: 1rem;
+    border-radius: 4px;
+    font-family: inherit;
+  }
+
+  .window {
+    background-color: $app-bgc;
+    border: 3px solid $window-border-dark-tone;
+    border-radius: 0.5rem 0.5rem 0 0;
+    margin: 0 auto;
+    max-width: 250px;
+
+    .window-header {
+      background: linear-gradient(
+        $window-border-light-tone 0%,
+        $window-border-dark-tone 20%,
+        $window-border-medium-tone 100%
+      );
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-radius: 0.25rem 0.25rem 0 0;
+      padding: 0.2rem;
+
+      .title-wrap {
+        display: flex;
+        gap: 0.2rem;
+
+        h1 {
+          font-size: 1rem;
+          margin: 0;
+        }
+      }
+
+      .window-controls button {
+        $size: 1.5rem;
+        width: $size;
+        height: $size;
+        border: 2px solid white;
+        padding: 0;
+        color: white;
+        font-weight: bold;
+      }
+
+      .minimize,
+      .maximize {
+        background-color: $window-border-dark-tone;
+      }
+
+      .close {
+        background-color: $danger;
+      }
+    }
+
+    .window-content {
+      padding: 0.5rem;
+
+      .display {
+        background-color: white;
+        text-align: right;
+        border: 1px solid grey;
+        padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+      }
+
+      .calc-btns {
+        margin-top: 1rem;
+
+        button {
+          background-color: white;
+          border: 1px solid black;
+          height: 2rem;
+        }
+
+        $buttons-gap: 0.25rem;
+
+        .first-btns-row {
+          display: grid;
+          grid-template-columns: repeat(4, 1fr);
+          gap: $buttons-gap;
+
+          .empty-square {
+            $size: 1.5rem;
+            width: $size;
+            height: $size;
+            margin-left: $buttons-gap;
+            border-top: 4px solid gray;
+            border-right: 4px solid white;
+            border-bottom: 4px solid white;
+            border-left: 4px solid gray;
+          }
+        }
+
+        .btns-grid {
+          display: grid;
+          grid-template-columns: repeat(6, 1fr);
+          gap: $buttons-gap;
+          margin-top: $buttons-gap;
+        }
+      }
+    }
+  }
+}
