@@ -1,10 +1,12 @@
 let currentNumber = 0;
 
 const numbersBtns = document.querySelectorAll(".number");
+const switchSignBtn = document.querySelector(".switch-sign");
 
 window.onload = updateDisplay;
 window.onkeydown = handleNumberInput;
 numbersBtns.forEach((b) => b.addEventListener("click", handleNumberInput));
+switchSignBtn.addEventListener("click", handleSwitchSign);
 
 function updateDisplay() {
   const display = document.querySelector(".display");
@@ -25,5 +27,10 @@ function handleNumberInput(e) {
   if (!num) return;
 
   currentNumber = parseInt(currentNumber.toString() + num.toString());
+  updateDisplay();
+}
+
+function handleSwitchSign() {
+  currentNumber *= -1;
   updateDisplay();
 }
