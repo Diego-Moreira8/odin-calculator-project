@@ -79,6 +79,11 @@ body {
 
       .calc-btns {
         margin-top: 1rem;
+        display: grid;
+        grid-template-columns: repeat(7, auto);
+        grid-template-rows: repeat(5, 1fr);
+        align-items: stretch;
+        justify-items: stretch;
 
         button {
           background-color: white;
@@ -88,10 +93,18 @@ body {
 
         $buttons-gap: 0.25rem;
 
-        .first-btns-row {
+        .clear-btns,
+        .operations-btns,
+        .memory-btns,
+        .numbers-btns {
           display: grid;
-          grid-template-columns: repeat(4, 1fr);
           gap: $buttons-gap;
+        }
+
+        .clear-btns {
+          grid-template-columns: repeat(4, 1fr);
+          grid-column: 1 / -1;
+          grid-row: 1 / 2;
 
           .empty-square {
             $size: 1.5rem;
@@ -105,11 +118,24 @@ body {
           }
         }
 
-        .btns-grid {
-          display: grid;
-          grid-template-columns: repeat(6, 1fr);
-          gap: $buttons-gap;
-          margin-top: $buttons-gap;
+        .memory-btns {
+          grid-template-columns: 1fr;
+          grid-column: 1;
+          grid-row: 2 / 6;
+          margin-right: $buttons-gap;
+        }
+
+        .numbers-btns {
+          grid-template-columns: repeat(3, 1fr);
+          grid-column: 2 / 6;
+          grid-row: 2 / 6;
+          margin-right: $buttons-gap;
+        }
+
+        .operations-btns {
+          grid-template-columns: repeat(2, 1fr);
+          grid-column: 6 / 8;
+          grid-row: 2 / 6;
         }
       }
     }

@@ -60,18 +60,30 @@ body .window .window-content .display {
 }
 body .window .window-content .calc-btns {
   margin-top: 1rem;
+  display: grid;
+  grid-template-columns: repeat(7, auto);
+  grid-template-rows: repeat(5, 1fr);
+  align-items: stretch;
+  justify-items: stretch;
 }
 body .window .window-content .calc-btns button {
   background-color: white;
   border: 1px solid black;
   height: 2rem;
 }
-body .window .window-content .calc-btns .first-btns-row {
+body .window .window-content .calc-btns .clear-btns,
+body .window .window-content .calc-btns .operations-btns,
+body .window .window-content .calc-btns .memory-btns,
+body .window .window-content .calc-btns .numbers-btns {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
   gap: 0.25rem;
 }
-body .window .window-content .calc-btns .first-btns-row .empty-square {
+body .window .window-content .calc-btns .clear-btns {
+  grid-template-columns: repeat(4, 1fr);
+  grid-column: 1/-1;
+  grid-row: 1/2;
+}
+body .window .window-content .calc-btns .clear-btns .empty-square {
   width: 1.5rem;
   height: 1.5rem;
   margin-left: 0.25rem;
@@ -80,11 +92,22 @@ body .window .window-content .calc-btns .first-btns-row .empty-square {
   border-bottom: 4px solid white;
   border-left: 4px solid gray;
 }
-body .window .window-content .calc-btns .btns-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: 0.25rem;
-  margin-top: 0.25rem;
+body .window .window-content .calc-btns .memory-btns {
+  grid-template-columns: 1fr;
+  grid-column: 1;
+  grid-row: 2/6;
+  margin-right: 0.25rem;
+}
+body .window .window-content .calc-btns .numbers-btns {
+  grid-template-columns: repeat(3, 1fr);
+  grid-column: 2/6;
+  grid-row: 2/6;
+  margin-right: 0.25rem;
+}
+body .window .window-content .calc-btns .operations-btns {
+  grid-template-columns: repeat(2, 1fr);
+  grid-column: 6/8;
+  grid-row: 2/6;
 }
 
 /*# sourceMappingURL=styles.css.map */
