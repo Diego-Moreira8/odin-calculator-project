@@ -57,6 +57,7 @@ body .window .window-content .display {
   text-align: right;
   border: 1px solid grey;
   padding: 0.25rem 0.5rem 0.5rem 0.5rem;
+  height: 1rem;
 }
 body .window .window-content .calc-btns {
   margin-top: 1rem;
