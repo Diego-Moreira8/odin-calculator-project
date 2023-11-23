@@ -1,5 +1,8 @@
+let lastNumber = null;
+let currentOperator = null;
 let currentNumber = 0;
 let isFloat = false;
+let displayingResult = false;
 
 const numbersBtns = document.querySelectorAll(".number");
 const switchSignBtn = document.querySelector(".switch-sign");
@@ -7,6 +10,7 @@ const pointBtn = document.querySelector(".point");
 const clearBtn = document.querySelector(".clear");
 const clearEntryBtn = document.querySelector(".clear-entry");
 const backspaceBtn = document.querySelector(".backspace");
+const operationsBtns = document.querySelectorAll(".operation");
 
 window.onload = updateDisplay;
 window.onkeydown = handleKeyDown;
@@ -18,6 +22,9 @@ pointBtn.addEventListener("click", handleInsertPoint);
 clearBtn.addEventListener("click", handleClear);
 clearEntryBtn.addEventListener("click", handleClearEntry);
 backspaceBtn.addEventListener("click", handleBackspace);
+operationsBtns.forEach((btn) =>
+  btn.addEventListener("click", handleOperationButton)
+);
 
 function updateDisplay() {
   const display = document.querySelector(".display");
@@ -63,6 +70,11 @@ function handleNumberInput(value) {
     (!isFloat && `${currentNumber}`.length === 8)
   ) {
     return;
+  }
+
+  if (displayingResult) {
+    currentNumber = 0;
+    displayingResult = false;
   }
 
   if (isFloat) {
@@ -121,6 +133,60 @@ function handleBackspace() {
   } else {
     currentNumber =
       currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -1));
+  }
+
+  updateDisplay();
+}
+
+function handleOperationButton(e) {
+  const CLICKED_OPERATOR = e.target.getAttribute("data-operator");
+
+  if (CLICKED_OPERATOR === "equals") {
+    operate();
+    lastNumber = null;
+    currentOperator = null;
+    displayingResult = true;
+    return;
+  }
+
+  if (!lastNumber) {
+    lastNumber = currentNumber;
+    currentOperator = CLICKED_OPERATOR;
+    currentNumber = 0;
+    isFloat = false;
+  } else {
+    operate();
+  }
+
+  //console.log(lastNumber, currentOperator, currentNumber);
+}
+
+function operate() {
+  switch (currentOperator) {
+    case "divide":
+      // to-do
+      break;
+    case "equals":
+      // to-do
+      break;
+    case "multiply":
+      // to-do
+      break;
+    case "one-over":
+      // to-do
+      break;
+    case "percentage":
+      // to-do
+      break;
+    case "square-root":
+      // to-do
+      break;
+    case "subtract":
+      // to-do
+      break;
+    case "sum":
+      currentNumber += lastNumber;
+      break;
   }
 
   updateDisplay();
