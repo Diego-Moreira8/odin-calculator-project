@@ -4,15 +4,22 @@ let isFloat = false;
 const numbersBtns = document.querySelectorAll(".number");
 const switchSignBtn = document.querySelector(".switch-sign");
 const pointBtn = document.querySelector(".point");
+const clearBtn = document.querySelector(".clear");
+const clearEntryBtn = document.querySelector(".clear-entry");
+const backspaceBtn = document.querySelector(".backspace");
 
 window.onload = updateDisplay;
 window.onkeydown = (e) => {
   if (!isNaN(parseInt(e.key))) handleNumberInput(e);
   if (e.key === ".") handleInsertPoint();
+  if (e.key === "Backspace") handleBackspace();
 };
 numbersBtns.forEach((b) => b.addEventListener("click", handleNumberInput));
 switchSignBtn.addEventListener("click", handleSwitchSign);
 pointBtn.addEventListener("click", handleInsertPoint);
+clearBtn.addEventListener("click", handleClear);
+clearEntryBtn.addEventListener("click", handleClearEntry);
+backspaceBtn.addEventListener("click", handleBackspace);
 
 function updateDisplay() {
   const display = document.querySelector(".display");
@@ -66,3 +73,16 @@ function handleInsertPoint() {
   isFloat = true;
   updateDisplay();
 }
+
+function handleClear() {
+  currentNumber = 0;
+  isFloat = false;
+  pointBtn.disabled = false;
+  updateDisplay();
+}
+
+function handleClearEntry() {
+  handleClear();
+}
+
+function handleBackspace() {}
