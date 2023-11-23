@@ -10,7 +10,9 @@ const backspaceBtn = document.querySelector(".backspace");
 
 window.onload = updateDisplay;
 window.onkeydown = handleKeyDown;
-numbersBtns.forEach((b) => b.addEventListener("click", handleNumberInput));
+numbersBtns.forEach((b) =>
+  b.addEventListener("click", (e) => handleNumberInput(e.target.textContent))
+);
 switchSignBtn.addEventListener("click", handleSwitchSign);
 pointBtn.addEventListener("click", handleInsertPoint);
 clearBtn.addEventListener("click", handleClear);
@@ -41,7 +43,7 @@ function handleKeyDown(e) {
     case "7":
     case "8":
     case "9":
-      handleNumberInput(e);
+      handleNumberInput(e.key);
       break;
     case ".":
       handleInsertPoint();
@@ -55,7 +57,7 @@ function handleKeyDown(e) {
   }
 }
 
-function handleNumberInput(e) {
+function handleNumberInput(value) {
   if (
     (isFloat && `${currentNumber}`.length === 9) ||
     (!isFloat && `${currentNumber}`.length === 8)
@@ -63,24 +65,14 @@ function handleNumberInput(e) {
     return;
   }
 
-  let num;
-
-  if (e.type === "click") {
-    num = e.target.textContent;
-  } else if (e.type === "keydown") {
-    num = e.key;
-  }
-
-  if (!num) return;
-
   if (isFloat) {
     let pointIndex = `${currentNumber}`.indexOf(".");
     currentNumber =
       pointIndex === -1
-        ? parseFloat(`${currentNumber}.${num}`)
-        : parseFloat(`${currentNumber}${num}`);
+        ? parseFloat(`${currentNumber}.${value}`)
+        : parseFloat(`${currentNumber}${value}`);
   } else {
-    currentNumber = parseInt(`${currentNumber}${num}`);
+    currentNumber = parseInt(`${currentNumber}${value}`);
   }
 
   updateDisplay();
