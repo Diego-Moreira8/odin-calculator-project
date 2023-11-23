@@ -9,11 +9,7 @@ const clearEntryBtn = document.querySelector(".clear-entry");
 const backspaceBtn = document.querySelector(".backspace");
 
 window.onload = updateDisplay;
-window.onkeydown = (e) => {
-  if (!isNaN(parseInt(e.key))) handleNumberInput(e);
-  if (e.key === ".") handleInsertPoint();
-  if (e.key === "Backspace") handleBackspace();
-};
+window.onkeydown = handleKeyDown;
 numbersBtns.forEach((b) => b.addEventListener("click", handleNumberInput));
 switchSignBtn.addEventListener("click", handleSwitchSign);
 pointBtn.addEventListener("click", handleInsertPoint);
@@ -28,6 +24,34 @@ function updateDisplay() {
   // If is float and has no digits before the floating point...
   if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
     display.textContent = `${currentNumber}.0`;
+  }
+}
+
+function handleKeyDown(e) {
+  //console.log(e.key);
+
+  switch (e.key) {
+    case "0":
+    case "1":
+    case "2":
+    case "3":
+    case "4":
+    case "5":
+    case "6":
+    case "7":
+    case "8":
+    case "9":
+      handleNumberInput(e);
+      break;
+    case ".":
+      handleInsertPoint();
+      break;
+    case "Backspace":
+      handleBackspace();
+      break;
+    case "Escape":
+      handleClear();
+      break;
   }
 }
 
@@ -74,10 +98,14 @@ function handleInsertPoint() {
   updateDisplay();
 }
 
-function handleClear() {
-  currentNumber = 0;
+function cancelFloat() {
   isFloat = false;
   pointBtn.disabled = false;
+}
+
+function handleClear() {
+  currentNumber = 0;
+  cancelFloat();
   updateDisplay();
 }
 
@@ -85,4 +113,23 @@ function handleClearEntry() {
   handleClear();
 }
 
-function handleBackspace() {}
+function handleBackspace() {
+  let currNumString = `${currentNumber}`;
+
+  if (isFloat) {
+    // Has only one number after the floating point?
+    if (currNumString.indexOf(".") === currNumString.length - 2) {
+      currentNumber =
+        currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -2));
+      cancelFloat();
+    } else {
+      currentNumber =
+        currNumString.length <= 1 ? 0 : parseFloat(currNumString.slice(0, -1));
+    }
+  } else {
+    currentNumber =
+      currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -1));
+  }
+
+  updateDisplay();
+}
