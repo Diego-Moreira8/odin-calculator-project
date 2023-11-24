@@ -72,10 +72,22 @@ body {
 
       .display {
         background-color: white;
-        text-align: right;
         border: 1px solid grey;
         padding: 0.25rem 0.5rem 0.5rem 0.5rem;
         height: 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .current-number {
+          text-align: right;
+        }
+
+        .last-number,
+        .current-operator {
+          color: grey;
+          font-size: 0.75rem;
+        }
       }
 
       .calc-btns {

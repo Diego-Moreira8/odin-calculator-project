@@ -27,12 +27,46 @@ operationsBtns.forEach((btn) =>
 );
 
 function updateDisplay() {
-  const display = document.querySelector(".display");
-  display.textContent = currentNumber;
+  const lastNumberDisplay = document.querySelector(".last-number");
+  const currOperatorDisplay = document.querySelector(".current-operator");
+  const currNumberDisplay = document.querySelector(".current-number");
+
+  lastNumberDisplay.textContent = lastNumber ? `${lastNumber}` : "";
+
+  switch (currentOperator) {
+    case "divide":
+      currOperatorDisplay.textContent = "/";
+      break;
+    case "equals":
+      // to-do
+      break;
+    case "multiply":
+      currOperatorDisplay.textContent = "*";
+      break;
+    case "one-over":
+      // to-do
+      break;
+    case "percentage":
+      // to-do
+      break;
+    case "square-root":
+      // to-do
+      break;
+    case "subtract":
+      currOperatorDisplay.textContent = "-";
+      break;
+    case "sum":
+      currOperatorDisplay.textContent = "+";
+      break;
+    default:
+      currOperatorDisplay.textContent = "";
+  }
 
   // If is float and has no digits before the floating point...
   if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
-    display.textContent = `${currentNumber}.0`;
+    currNumberDisplay.textContent = `${currentNumber}.0`;
+  } else {
+    currNumberDisplay.textContent = currentNumber;
   }
 }
 
@@ -109,6 +143,9 @@ function cancelFloat() {
 
 function handleClear() {
   currentNumber = 0;
+  lastNumber = null;
+  currentOperator = null;
+  displayingResult = false;
   cancelFloat();
   updateDisplay();
 }
@@ -146,18 +183,18 @@ function handleOperationButton(e) {
     lastNumber = null;
     currentOperator = null;
     displayingResult = true;
-    return;
-  }
-
-  if (!lastNumber) {
-    lastNumber = currentNumber;
-    currentOperator = CLICKED_OPERATOR;
-    currentNumber = 0;
-    isFloat = false;
   } else {
-    operate();
+    if (!lastNumber) {
+      lastNumber = currentNumber;
+      currentOperator = CLICKED_OPERATOR;
+      currentNumber = 0;
+      isFloat = false;
+    } else {
+      operate();
+    }
   }
 
+  updateDisplay();
   //console.log(lastNumber, currentOperator, currentNumber);
 }
 
@@ -188,6 +225,4 @@ function operate() {
       currentNumber += lastNumber;
       break;
   }
-
-  updateDisplay();
 }
