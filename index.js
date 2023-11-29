@@ -26,7 +26,9 @@ clearBtn.addEventListener("click", handleClear);
 clearEntryBtn.addEventListener("click", handleClearEntry);
 backspaceBtn.addEventListener("click", handleBackspace);
 operationsBtns.forEach((btn) =>
-  btn.addEventListener("click", handleOperationButton)
+  btn.addEventListener("click", (e) =>
+    handleOperationButton(e.target.getAttribute("data-operator"))
+  )
 );
 
 function updateDisplay() {
@@ -107,6 +109,21 @@ function handleKeyDown(e) {
       break;
     case "Escape":
       handleClear();
+      break;
+    case "+":
+      handleOperationButton("sum");
+      break;
+    case "-":
+      handleOperationButton("subtract");
+      break;
+    case "/":
+      handleOperationButton("divide");
+      break;
+    case "*":
+      handleOperationButton("multiply");
+      break;
+    case "Enter":
+      handleOperationButton("equals");
       break;
   }
 }
@@ -194,10 +211,8 @@ function handleBackspace() {
   updateDisplay();
 }
 
-function handleOperationButton(e) {
-  const CLICKED_OPERATOR = e.target.getAttribute("data-operator");
-
-  if (CLICKED_OPERATOR === "equals") {
+function handleOperationButton(operator) {
+  if (operator === "equals") {
     rightNumber = currentNumber;
     operate(); // The last clicked operator isn't changed
     displayingResult = true;
@@ -209,13 +224,13 @@ function handleOperationButton(e) {
     if (displayingResult) {
       displayingResult = false;
       leftNumber = result;
-      currentOperator = CLICKED_OPERATOR;
+      currentOperator = operator;
       rightNumber = null;
       result = null;
       currentNumber = 0;
     } else if (!leftNumber) {
       leftNumber = currentNumber;
-      currentOperator = CLICKED_OPERATOR;
+      currentOperator = operator;
       currentNumber = 0;
       isFloat = false;
     } else {
