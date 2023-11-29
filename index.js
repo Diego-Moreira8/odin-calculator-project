@@ -213,6 +213,8 @@ function handleBackspace() {
 
 function handleOperationButton(operator) {
   if (operator === "equals") {
+    if (!leftNumber) return;
+
     rightNumber = currentNumber;
     operate(); // The last clicked operator isn't changed
     displayingResult = true;
@@ -233,14 +235,21 @@ function handleOperationButton(operator) {
       currentOperator = operator;
       currentNumber = 0;
       isFloat = false;
+    } else if (!rightNumber) {
+      rightNumber = currentNumber;
+      operate();
+      leftNumber = result;
+      currentOperator = operator;
+      rightNumber = null;
+      result = null;
+      currentNumber = 0;
+      isFloat = false;
     } else {
       rightNumber = currentNumber;
       operate();
     }
     updateDisplay();
   }
-
-  //console.log(leftNumber, currentOperator, currentNumber);
 }
 
 function operate() {
