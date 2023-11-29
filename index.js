@@ -219,6 +219,12 @@ function handleOperationButton(operator) {
   if (operator === "equals") {
     if (leftNumber === null) return;
 
+    if (displayingResult) {
+      leftNumber = result;
+      operate();
+      updateDisplay();
+    }
+
     rightNumber = currentNumber;
     operate(); // The last clicked operator isn't changed
     displayingResult = true;
