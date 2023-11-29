@@ -1,5 +1,8 @@
-let lastNumber = null;
+let leftNumber = null;
 let currentOperator = null;
+let rightNumber = null;
+let result = null;
+
 let currentNumber = 0;
 let isFloat = false;
 let displayingResult = false;
@@ -27,11 +30,14 @@ operationsBtns.forEach((btn) =>
 );
 
 function updateDisplay() {
-  const lastNumberDisplay = document.querySelector(".last-number");
+  const leftNumberDisplay = document.querySelector(".left-number");
   const currOperatorDisplay = document.querySelector(".current-operator");
+  const rightNumberDisplay = document.querySelector(".right-number");
+  const equalsSignDisplay = document.querySelector(".result");
   const currNumberDisplay = document.querySelector(".current-number");
 
-  lastNumberDisplay.textContent = lastNumber ? `${lastNumber}` : "";
+  leftNumberDisplay.textContent = leftNumber ? `${leftNumber}` : "";
+  rightNumberDisplay.textContent = rightNumber ? `${rightNumber}` : "";
 
   switch (currentOperator) {
     case "divide":
@@ -62,16 +68,23 @@ function updateDisplay() {
       currOperatorDisplay.textContent = "";
   }
 
-  // If is float and has no digits before the floating point...
-  if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
-    currNumberDisplay.textContent = `${currentNumber}.0`;
+  if (displayingResult) equalsSignDisplay.classList.add("active");
+  else equalsSignDisplay.classList.remove("active");
+
+  if (result) {
+    currNumberDisplay.textContent = `${result}`;
   } else {
-    currNumberDisplay.textContent = currentNumber;
+    // If is float and has no digits before the floating point...
+    if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
+      currNumberDisplay.textContent = `${currentNumber}.0`;
+    } else {
+      currNumberDisplay.textContent = currentNumber;
+    }
   }
 }
 
 function handleKeyDown(e) {
-  //console.log(e.key);
+  console.log(e.key);
 
   switch (e.key) {
     case "0":
@@ -143,8 +156,10 @@ function cancelFloat() {
 
 function handleClear() {
   currentNumber = 0;
-  lastNumber = null;
+  leftNumber = null;
   currentOperator = null;
+  rightNumber = null;
+  result = null;
   displayingResult = false;
   cancelFloat();
   updateDisplay();
@@ -179,23 +194,27 @@ function handleOperationButton(e) {
   const CLICKED_OPERATOR = e.target.getAttribute("data-operator");
 
   if (CLICKED_OPERATOR === "equals") {
-    operate();
-    lastNumber = null;
-    currentOperator = null;
+    rightNumber = currentNumber;
+    operate(); // The last clicked operator isn't changed
     displayingResult = true;
+    updateDisplay();
+    leftNumber = null;
+    currentOperator = null;
+    rightNumber = null;
   } else {
-    if (!lastNumber) {
-      lastNumber = currentNumber;
+    if (!leftNumber) {
+      leftNumber = currentNumber;
       currentOperator = CLICKED_OPERATOR;
       currentNumber = 0;
       isFloat = false;
     } else {
+      rightNumber = currentNumber;
       operate();
     }
+    updateDisplay();
   }
 
-  updateDisplay();
-  //console.log(lastNumber, currentOperator, currentNumber);
+  //console.log(leftNumber, currentOperator, currentNumber);
 }
 
 function operate() {
@@ -222,7 +241,7 @@ function operate() {
       // to-do
       break;
     case "sum":
-      currentNumber += lastNumber;
+      result = leftNumber + rightNumber;
       break;
   }
 }

@@ -61,13 +61,18 @@ body .window .window-content .display {
   justify-content: space-between;
   align-items: center;
 }
+body .window .window-content .display .expression {
+  color: grey;
+  font-size: 0.65rem;
+}
+body .window .window-content .display .expression .result {
+  display: none;
+}
+body .window .window-content .display .expression .result.active {
+  display: inline;
+}
 body .window .window-content .display .current-number {
   text-align: right;
-}
-body .window .window-content .display .last-number,
-body .window .window-content .display .current-operator {
-  color: grey;
-  font-size: 0.75rem;
 }
 body .window .window-content .calc-btns {
   margin-top: 1rem;

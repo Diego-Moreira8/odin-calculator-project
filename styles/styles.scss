@@ -79,14 +79,21 @@ body {
         justify-content: space-between;
         align-items: center;
 
-        .current-number {
-          text-align: right;
+        .expression {
+          color: grey;
+          font-size: 0.65rem;
+
+          .result {
+            display: none;
+
+            &.active {
+              display: inline;
+            }
+          }
         }
 
-        .last-number,
-        .current-operator {
-          color: grey;
-          font-size: 0.75rem;
+        .current-number {
+          text-align: right;
         }
       }
 
