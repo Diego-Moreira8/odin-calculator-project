@@ -134,6 +134,8 @@ function handleNumberInput(value) {
     currentNumber = parseInt(`${currentNumber}${value}`);
   }
 
+  switchSignBtn.disabled = currentNumber === 0;
+
   updateDisplay();
 }
 
@@ -156,6 +158,7 @@ function cancelFloat() {
 
 function handleClear() {
   currentNumber = 0;
+  switchSignBtn.disabled = currentNumber === 0;
   leftNumber = null;
   currentOperator = null;
   rightNumber = null;
@@ -186,6 +189,8 @@ function handleBackspace() {
     currentNumber =
       currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -1));
   }
+
+  switchSignBtn.disabled = currentNumber === 0;
 
   updateDisplay();
 }
