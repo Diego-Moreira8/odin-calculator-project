@@ -36,8 +36,8 @@ function updateDisplay() {
   const equalsSignDisplay = document.querySelector(".result");
   const currNumberDisplay = document.querySelector(".current-number");
 
-  leftNumberDisplay.textContent = leftNumber ? `${leftNumber}` : "";
-  rightNumberDisplay.textContent = rightNumber ? `${rightNumber}` : "";
+  leftNumberDisplay.textContent = leftNumber !== null ? `${leftNumber}` : "";
+  rightNumberDisplay.textContent = rightNumber !== null ? `${rightNumber}` : "";
 
   switch (currentOperator) {
     case "divide":
@@ -220,13 +220,13 @@ function handleOperationButton(e) {
 function operate() {
   switch (currentOperator) {
     case "divide":
-      // to-do
+      result = leftNumber / rightNumber;
       break;
     case "equals":
       // to-do
       break;
     case "multiply":
-      // to-do
+      result = leftNumber * rightNumber;
       break;
     case "one-over":
       // to-do
@@ -238,7 +238,7 @@ function operate() {
       // to-do
       break;
     case "subtract":
-      // to-do
+      result = leftNumber - rightNumber;
       break;
     case "sum":
       result = leftNumber + rightNumber;
