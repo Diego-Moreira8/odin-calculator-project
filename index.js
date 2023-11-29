@@ -185,7 +185,10 @@ function handleClear() {
 }
 
 function handleClearEntry() {
-  handleClear();
+  currentNumber = 0;
+  switchSignBtn.disabled = currentNumber === 0;
+  cancelFloat();
+  updateDisplay();
 }
 
 function handleBackspace() {
@@ -212,16 +215,14 @@ function handleBackspace() {
 }
 
 function handleOperationButton(operator) {
+  console.log(operator);
   if (operator === "equals") {
-    if (!leftNumber) return;
+    if (leftNumber === null) return;
 
     rightNumber = currentNumber;
     operate(); // The last clicked operator isn't changed
     displayingResult = true;
     updateDisplay();
-    leftNumber = null;
-    currentOperator = null;
-    rightNumber = null;
   } else {
     if (displayingResult) {
       displayingResult = false;
@@ -230,12 +231,12 @@ function handleOperationButton(operator) {
       rightNumber = null;
       result = null;
       currentNumber = 0;
-    } else if (!leftNumber) {
+    } else if (leftNumber === null) {
       leftNumber = currentNumber;
       currentOperator = operator;
       currentNumber = 0;
       isFloat = false;
-    } else if (!rightNumber) {
+    } else if (rightNumber === null) {
       rightNumber = currentNumber;
       operate();
       leftNumber = result;
