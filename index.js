@@ -120,8 +120,7 @@ function handleNumberInput(value) {
   }
 
   if (displayingResult) {
-    currentNumber = 0;
-    displayingResult = false;
+    handleClear();
   }
 
   if (isFloat) {
@@ -207,7 +206,14 @@ function handleOperationButton(e) {
     currentOperator = null;
     rightNumber = null;
   } else {
-    if (!leftNumber) {
+    if (displayingResult) {
+      displayingResult = false;
+      leftNumber = result;
+      currentOperator = CLICKED_OPERATOR;
+      rightNumber = null;
+      result = null;
+      currentNumber = 0;
+    } else if (!leftNumber) {
       leftNumber = currentNumber;
       currentOperator = CLICKED_OPERATOR;
       currentNumber = 0;
