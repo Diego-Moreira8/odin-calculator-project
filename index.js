@@ -216,6 +216,12 @@ function handleBackspace() {
 
 function handleOperationButton(operator) {
   console.log(operator);
+
+  if (currentOperator === "divide" && currentNumber === 0) {
+    alert("Não é possível dividir por 0!");
+    return;
+  }
+
   if (operator === "equals") {
     if (leftNumber === null) return;
 
