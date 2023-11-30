@@ -63,7 +63,7 @@ body .window .window-content .display {
 }
 body .window .window-content .display .expression {
   color: grey;
-  font-size: 0.65rem;
+  font-size: 0.5rem;
 }
 body .window .window-content .display .expression .result {
   display: none;

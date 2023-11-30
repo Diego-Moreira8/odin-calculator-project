@@ -38,8 +38,18 @@ function updateDisplay() {
   const equalsSignDisplay = document.querySelector(".result");
   const currNumberDisplay = document.querySelector(".current-number");
 
-  leftNumberDisplay.textContent = leftNumber !== null ? `${leftNumber}` : "";
-  rightNumberDisplay.textContent = rightNumber !== null ? `${rightNumber}` : "";
+  const switchNumberDisplay = (number) => {
+    const DIGITS_LIMIT = 10;
+
+    if (number === null) return "";
+    if (`${number}`.length > DIGITS_LIMIT) {
+      return `${number}`.slice(0, DIGITS_LIMIT) + "...";
+    }
+    return number;
+  };
+
+  leftNumberDisplay.textContent = switchNumberDisplay(leftNumber);
+  rightNumberDisplay.textContent = switchNumberDisplay(rightNumber);
 
   switch (currentOperator) {
     case "divide":
@@ -74,7 +84,7 @@ function updateDisplay() {
   else equalsSignDisplay.classList.remove("active");
 
   if (result) {
-    currNumberDisplay.textContent = `${result}`;
+    currNumberDisplay.textContent = switchNumberDisplay(result);
   } else {
     // If is float and has no digits before the floating point...
     if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
