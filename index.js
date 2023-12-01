@@ -1,11 +1,19 @@
-let leftNumber = null;
-let currentOperator = null;
-let rightNumber = null;
-let result = null;
+const DEFAULTS = {
+  LEFT_NUMBER: null,
+  CURRENT_OPERATOR: null,
+  RIGHT_NUMBER: null,
+  RESULT: null,
+  CURRENT_NUMBER: 0,
+  IS_FLOAT: false,
+};
 
-let currentNumber = 0;
-let isFloat = false;
-let displayingResult = false;
+let leftNumber = DEFAULTS.LEFT_NUMBER;
+let currentOperator = DEFAULTS.CURRENT_OPERATOR;
+let rightNumber = DEFAULTS.RIGHT_NUMBER;
+let result = DEFAULTS.RESULT;
+
+let currentNumber = DEFAULTS.CURRENT_NUMBER;
+let isFloat = DEFAULTS.IS_FLOAT;
 
 const numbersBtns = document.querySelectorAll(".number");
 const switchSignBtn = document.querySelector(".switch-sign");
@@ -38,31 +46,26 @@ function updateDisplay() {
   const equalsSignDisplay = document.querySelector(".result");
   const currNumberDisplay = document.querySelector(".current-number");
 
-  const switchNumberDisplay = (number) => {
+  const formatNumberDisplay = (number) => {
     const DIGITS_LIMIT = 10;
 
-    if (number === null) return "";
-    if (`${number}`.length > DIGITS_LIMIT) {
+    if (number === null) {
+      return "";
+    } else if (`${number}`.length > DIGITS_LIMIT) {
       return `${number}`.slice(0, DIGITS_LIMIT) + "...";
+    } else {
+      return number;
     }
-    return number;
   };
 
-  leftNumberDisplay.textContent = switchNumberDisplay(leftNumber);
-  rightNumberDisplay.textContent = switchNumberDisplay(rightNumber);
+  leftNumberDisplay.textContent = formatNumberDisplay(leftNumber);
 
   switch (currentOperator) {
     case "divide":
       currOperatorDisplay.textContent = "/";
       break;
-    case "equals":
-      // to-do
-      break;
     case "multiply":
       currOperatorDisplay.textContent = "*";
-      break;
-    case "one-over":
-      // to-do
       break;
     case "percentage":
       // to-do
@@ -80,24 +83,21 @@ function updateDisplay() {
       currOperatorDisplay.textContent = "";
   }
 
-  if (displayingResult) equalsSignDisplay.classList.add("active");
-  else equalsSignDisplay.classList.remove("active");
+  rightNumberDisplay.textContent = formatNumberDisplay(rightNumber);
 
-  if (result) {
-    currNumberDisplay.textContent = switchNumberDisplay(result);
+  if (result === null) {
+    equalsSignDisplay.classList.remove("active");
+    currNumberDisplay.textContent =
+      isFloat && !`${currentNumber}`.includes(".")
+        ? `${currentNumber}.0`
+        : currentNumber;
   } else {
-    // If is float and has no digits before the floating point...
-    if (isFloat && `${currentNumber}`.indexOf(".") === -1) {
-      currNumberDisplay.textContent = `${currentNumber}.0`;
-    } else {
-      currNumberDisplay.textContent = currentNumber;
-    }
+    equalsSignDisplay.classList.add("active");
+    currNumberDisplay.textContent = formatNumberDisplay(result);
   }
 }
 
 function handleKeyDown(e) {
-  console.log(e.key);
-
   switch (e.key) {
     case "0":
     case "1":
@@ -111,6 +111,7 @@ function handleKeyDown(e) {
     case "9":
       handleNumberInput(e.key);
       break;
+    case ",":
     case ".":
       handleInsertPoint();
       break;
@@ -138,7 +139,7 @@ function handleKeyDown(e) {
   }
 }
 
-function handleNumberInput(value) {
+function handleNumberInput(newNumber) {
   if (
     (isFloat && `${currentNumber}`.length === 9) ||
     (!isFloat && `${currentNumber}`.length === 8)
@@ -146,22 +147,19 @@ function handleNumberInput(value) {
     return;
   }
 
-  if (displayingResult) {
+  if (result !== null) {
     handleClear();
   }
 
   if (isFloat) {
-    let pointIndex = `${currentNumber}`.indexOf(".");
-    currentNumber =
-      pointIndex === -1
-        ? parseFloat(`${currentNumber}.${value}`)
-        : parseFloat(`${currentNumber}${value}`);
+    currentNumber = `${currentNumber}`.includes(".")
+      ? parseFloat(`${currentNumber}${newNumber}`)
+      : parseFloat(`${currentNumber}.${newNumber}`);
   } else {
-    currentNumber = parseInt(`${currentNumber}${value}`);
+    currentNumber = parseInt(`${currentNumber}${newNumber}`);
   }
 
-  switchSignBtn.disabled = currentNumber === 0;
-
+  toggleSwitchSignBtn();
   updateDisplay();
 }
 
@@ -170,10 +168,20 @@ function handleSwitchSign() {
   updateDisplay();
 }
 
+function toggleSwitchSignBtn() {
+  switchSignBtn.disabled = currentNumber === 0;
+}
+
 function handleInsertPoint() {
-  if (isFloat) return;
-  pointBtn.disabled = true;
-  isFloat = true;
+  if (isFloat && !`${currentNumber}`.includes(".")) {
+    cancelFloat();
+  } else if (isFloat) {
+    return;
+  } else {
+    pointBtn.disabled = true;
+    isFloat = true;
+  }
+
   updateDisplay();
 }
 
@@ -183,20 +191,20 @@ function cancelFloat() {
 }
 
 function handleClear() {
-  currentNumber = 0;
-  switchSignBtn.disabled = currentNumber === 0;
-  leftNumber = null;
-  currentOperator = null;
-  rightNumber = null;
-  result = null;
-  displayingResult = false;
+  currentNumber = DEFAULTS.CURRENT_NUMBER;
+  leftNumber = DEFAULTS.LEFT_NUMBER;
+  currentOperator = DEFAULTS.CURRENT_OPERATOR;
+  rightNumber = DEFAULTS.RIGHT_NUMBER;
+  result = DEFAULTS.RESULT;
+  toggleSwitchSignBtn();
   cancelFloat();
   updateDisplay();
 }
 
+// Voltar aqui
 function handleClearEntry() {
-  currentNumber = 0;
-  switchSignBtn.disabled = currentNumber === 0;
+  currentNumber = DEFAULTS.CURRENT_NUMBER;
+  toggleSwitchSignBtn();
   cancelFloat();
   updateDisplay();
 }
@@ -205,7 +213,7 @@ function handleBackspace() {
   let currNumString = `${currentNumber}`;
 
   if (isFloat) {
-    // Has only one number after the floating point?
+    // And has only one number after the point...
     if (currNumString.indexOf(".") === currNumString.length - 2) {
       currentNumber =
         currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -2));
@@ -219,23 +227,28 @@ function handleBackspace() {
       currNumString.length <= 1 ? 0 : parseInt(currNumString.slice(0, -1));
   }
 
-  switchSignBtn.disabled = currentNumber === 0;
-
+  toggleSwitchSignBtn();
   updateDisplay();
 }
 
 function handleOperationButton(operator) {
-  console.log(operator);
-
   if (currentOperator === "divide" && currentNumber === 0) {
     alert("Não é possível dividir por 0!");
+    return;
+  }
+
+  if (operator === "one-over") {
+    leftNumber = 1;
+    currentOperator = "divide";
+    currentNumber = result === null ? currentNumber : result;
+    handleOperationButton("equals");
     return;
   }
 
   if (operator === "equals") {
     if (leftNumber === null) return;
 
-    if (displayingResult) {
+    if (result !== null) {
       leftNumber = result;
       operate();
       updateDisplay();
@@ -243,11 +256,8 @@ function handleOperationButton(operator) {
 
     rightNumber = currentNumber;
     operate(); // The last clicked operator isn't changed
-    displayingResult = true;
-    updateDisplay();
   } else {
-    if (displayingResult) {
-      displayingResult = false;
+    if (result !== null) {
       leftNumber = result;
       currentOperator = operator;
       rightNumber = null;
@@ -271,8 +281,9 @@ function handleOperationButton(operator) {
       rightNumber = currentNumber;
       operate();
     }
-    updateDisplay();
   }
+
+  updateDisplay();
 }
 
 function operate() {
