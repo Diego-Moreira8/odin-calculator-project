@@ -240,7 +240,10 @@ function handleOperationButton(operator) {
   if (operator === "one-over") {
     leftNumber = 1;
     currentOperator = "divide";
-    currentNumber = result === null ? currentNumber : result;
+    if (result !== null) {
+      currentNumber = result;
+      result = DEFAULTS.RESULT;
+    }
     handleOperationButton("equals");
     return;
   }
