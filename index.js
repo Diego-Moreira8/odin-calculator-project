@@ -186,7 +186,7 @@ function handleInsertPoint() {
 }
 
 function cancelFloat() {
-  isFloat = false;
+  isFloat = DEFAULTS.IS_FLOAT;
   pointBtn.disabled = false;
 }
 
@@ -249,41 +249,32 @@ function handleOperationButton(operator) {
   }
 
   if (operator === "equals") {
-    if (leftNumber === null) return;
-
-    if (result !== null) {
-      leftNumber = result;
-      operate();
-      updateDisplay();
-    }
+    if (leftNumber === DEFAULTS.LEFT_NUMBER) return;
 
     rightNumber = currentNumber;
-    operate(); // The last clicked operator isn't changed
-  } else {
-    if (result !== null) {
+    if (result !== DEFAULTS.RESULT) {
       leftNumber = result;
-      currentOperator = operator;
-      rightNumber = null;
-      result = null;
-      currentNumber = 0;
-    } else if (leftNumber === null) {
-      leftNumber = currentNumber;
-      currentOperator = operator;
-      currentNumber = 0;
-      isFloat = false;
-    } else if (rightNumber === null) {
-      rightNumber = currentNumber;
-      operate();
-      leftNumber = result;
-      currentOperator = operator;
-      rightNumber = null;
-      result = null;
-      currentNumber = 0;
-      isFloat = false;
-    } else {
-      rightNumber = currentNumber;
-      operate();
+      result = DEFAULTS.RESULT;
     }
+    operate();
+  } else if (result !== DEFAULTS.RESULT) {
+    leftNumber = result;
+    currentOperator = operator;
+    rightNumber = DEFAULTS.RIGHT_NUMBER;
+    result = DEFAULTS.RESULT;
+    handleClearEntry();
+  } else if (leftNumber === DEFAULTS.LEFT_NUMBER) {
+    leftNumber = currentNumber;
+    currentOperator = operator;
+    handleClearEntry();
+  } else if (rightNumber === DEFAULTS.RIGHT_NUMBER) {
+    rightNumber = currentNumber;
+    operate();
+    leftNumber = result;
+    currentOperator = operator;
+    rightNumber = DEFAULTS.RIGHT_NUMBER;
+    result = DEFAULTS.RESULT;
+    handleClearEntry();
   }
 
   updateDisplay();
@@ -294,14 +285,8 @@ function operate() {
     case "divide":
       result = leftNumber / rightNumber;
       break;
-    case "equals":
-      // to-do
-      break;
     case "multiply":
       result = leftNumber * rightNumber;
-      break;
-    case "one-over":
-      // to-do
       break;
     case "percentage":
       // to-do
