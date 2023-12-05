@@ -113,6 +113,7 @@ function handleKeyDown(e) {
       break;
     case ",":
     case ".":
+      if (pointBtn.disabled) break;
       handleInsertPoint();
       break;
     case "Backspace":
