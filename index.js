@@ -173,6 +173,11 @@ function toggleSwitchSignBtn() {
   switchSignBtn.disabled = currentNumber === 0;
 }
 
+function togglePercentageBtn() {
+  document.querySelector("[data-operator='percentage']").disabled =
+    rightNumber !== DEFAULTS.RIGHT_NUMBER || result !== DEFAULTS.RESULT;
+}
+
 function handleInsertPoint() {
   if (isFloat && !`${currentNumber}`.includes(".")) {
     cancelFloat();
@@ -198,11 +203,11 @@ function handleClear() {
   rightNumber = DEFAULTS.RIGHT_NUMBER;
   result = DEFAULTS.RESULT;
   toggleSwitchSignBtn();
+  togglePercentageBtn();
   cancelFloat();
   updateDisplay();
 }
 
-// Voltar aqui
 function handleClearEntry() {
   currentNumber = DEFAULTS.CURRENT_NUMBER;
   toggleSwitchSignBtn();
@@ -249,6 +254,16 @@ function handleOperationButton(operator) {
     return;
   }
 
+  if (operator === "percentage") {
+    if (currentOperator === "sum" || currentOperator === "subtract") {
+      currentNumber = leftNumber * (currentNumber / 100);
+    } else if (currentOperator === "multiply" || currentOperator === "divide") {
+      currentNumber = currentNumber / 100;
+    }
+    handleOperationButton("equals");
+    return;
+  }
+
   if (operator === "equals") {
     if (leftNumber === DEFAULTS.LEFT_NUMBER) return;
 
@@ -279,6 +294,7 @@ function handleOperationButton(operator) {
   }
 
   updateDisplay();
+  togglePercentageBtn();
 }
 
 function operate() {
