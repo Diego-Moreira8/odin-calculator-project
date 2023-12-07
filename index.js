@@ -22,6 +22,7 @@ const clearBtn = document.querySelector(".clear");
 const clearEntryBtn = document.querySelector(".clear-entry");
 const backspaceBtn = document.querySelector(".backspace");
 const operationsBtns = document.querySelectorAll(".operation");
+const percentageBtn = document.querySelector("[data-operator='percentage']");
 
 window.onload = updateDisplay;
 window.onkeydown = handleKeyDown;
@@ -67,11 +68,8 @@ function updateDisplay() {
     case "multiply":
       currOperatorDisplay.textContent = "*";
       break;
-    case "percentage":
-      // to-do
-      break;
     case "square-root":
-      // to-do
+      currOperatorDisplay.textContent = "√";
       break;
     case "subtract":
       currOperatorDisplay.textContent = "-";
@@ -137,6 +135,10 @@ function handleKeyDown(e) {
     case "Enter":
       handleOperationButton("equals");
       break;
+    case "%":
+      if (percentageBtn.disabled) break;
+      handleOperationButton("percentage");
+      break;
   }
 }
 
@@ -178,6 +180,11 @@ function togglePercentageBtn() {
     rightNumber !== DEFAULTS.RIGHT_NUMBER || result !== DEFAULTS.RESULT;
 }
 
+function toggleSqrtBtn() {
+  percentageBtn.disabled =
+    leftNumber !== DEFAULTS.LEFT_NUMBER || result !== DEFAULTS.RESULT;
+}
+
 function handleInsertPoint() {
   if (isFloat && !`${currentNumber}`.includes(".")) {
     cancelFloat();
@@ -202,6 +209,7 @@ function handleClear() {
   currentOperator = DEFAULTS.CURRENT_OPERATOR;
   rightNumber = DEFAULTS.RIGHT_NUMBER;
   result = DEFAULTS.RESULT;
+  toggleSqrtBtn();
   toggleSwitchSignBtn();
   togglePercentageBtn();
   cancelFloat();
@@ -264,6 +272,15 @@ function handleOperationButton(operator) {
     return;
   }
 
+  if (operator === "square-root") {
+    currentOperator = "square-root";
+    rightNumber = currentNumber;
+    result = Math.sqrt(currentNumber);
+    updateDisplay();
+    toggleSqrtBtn();
+    return;
+  }
+
   if (operator === "equals") {
     if (leftNumber === DEFAULTS.LEFT_NUMBER) return;
 
@@ -294,6 +311,7 @@ function handleOperationButton(operator) {
   }
 
   updateDisplay();
+  toggleSqrtBtn();
   togglePercentageBtn();
 }
 
@@ -304,12 +322,6 @@ function operate() {
       break;
     case "multiply":
       result = leftNumber * rightNumber;
-      break;
-    case "percentage":
-      // to-do
-      break;
-    case "square-root":
-      // to-do
       break;
     case "subtract":
       result = leftNumber - rightNumber;
