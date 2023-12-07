@@ -41,6 +41,8 @@ operationsBtns.forEach((btn) =>
 );
 
 function updateDisplay() {
+  toggleSqrtBtn();
+
   const leftNumberDisplay = document.querySelector(".left-number");
   const currOperatorDisplay = document.querySelector(".current-operator");
   const rightNumberDisplay = document.querySelector(".right-number");
@@ -176,13 +178,15 @@ function toggleSwitchSignBtn() {
 }
 
 function togglePercentageBtn() {
-  document.querySelector("[data-operator='percentage']").disabled =
+  percentageBtn.disabled =
     rightNumber !== DEFAULTS.RIGHT_NUMBER || result !== DEFAULTS.RESULT;
 }
 
 function toggleSqrtBtn() {
-  percentageBtn.disabled =
-    leftNumber !== DEFAULTS.LEFT_NUMBER || result !== DEFAULTS.RESULT;
+  document.querySelector("[data-operator='square-root']").disabled =
+    leftNumber !== DEFAULTS.LEFT_NUMBER ||
+    rightNumber !== DEFAULTS.RIGHT_NUMBER ||
+    result !== DEFAULTS.RESULT;
 }
 
 function handleInsertPoint() {
@@ -209,7 +213,6 @@ function handleClear() {
   currentOperator = DEFAULTS.CURRENT_OPERATOR;
   rightNumber = DEFAULTS.RIGHT_NUMBER;
   result = DEFAULTS.RESULT;
-  toggleSqrtBtn();
   toggleSwitchSignBtn();
   togglePercentageBtn();
   cancelFloat();
@@ -277,7 +280,6 @@ function handleOperationButton(operator) {
     rightNumber = currentNumber;
     result = Math.sqrt(currentNumber);
     updateDisplay();
-    toggleSqrtBtn();
     return;
   }
 
@@ -311,7 +313,6 @@ function handleOperationButton(operator) {
   }
 
   updateDisplay();
-  toggleSqrtBtn();
   togglePercentageBtn();
 }
 
