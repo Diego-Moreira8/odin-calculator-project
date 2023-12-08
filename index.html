@@ -35,22 +35,60 @@
         <div class="calc-btns">
           <div class="clear-btns">
             <div class="empty-square"></div>
-            <button type="button" class="backspace">Backspace</button>
-            <button type="button" class="clear-entry">CE</button>
-            <button type="button" class="clear">C</button>
+            <button
+              type="button"
+              class="backspace"
+              title="Apaga o último dígito inserido"
+            >
+              Apagar
+            </button>
+            <button
+              type="button"
+              class="clear-entry"
+              title="Apaga toda a entrada atual"
+            >
+              CE
+            </button>
+            <button
+              type="button"
+              class="clear"
+              title="Apaga toda a expressão atual"
+            >
+              C
+            </button>
           </div>
 
           <div class="memory-btns">
-            <button type="button" class="memory" data-memory-action="clear">
+            <button
+              type="button"
+              class="memory"
+              data-memory-action="clear"
+              title="Apaga a memória"
+            >
               MC
             </button>
-            <button type="button" class="memory" data-memory-action="recall">
+            <button
+              type="button"
+              class="memory"
+              data-memory-action="recall"
+              title="Traz a memória para a entrada"
+            >
               MR
             </button>
-            <button type="button" class="memory" data-memory-action="store">
+            <button
+              type="button"
+              class="memory"
+              data-memory-action="store"
+              title="Substitui o número na memória pelo número atual"
+            >
               MS
             </button>
-            <button type="button" class="memory" data-memory-action="sum">
+            <button
+              type="button"
+              class="memory"
+              data-memory-action="sum"
+              title="Soma o número atual ao da memória"
+            >
               M+
             </button>
           </div>
@@ -67,37 +105,80 @@
             <button type="button" class="number">3</button>
             <button type="button" class="number">0</button>
             <button type="button" class="point">.</button>
-            <button type="button" class="switch-sign" disabled>+/-</button>
+            <button
+              type="button"
+              class="switch-sign"
+              title="Trocar sinal"
+              disabled
+            >
+              +/-
+            </button>
           </div>
 
           <div class="operations-btns">
-            <button type="button" class="operation" data-operator="divide">
+            <button
+              type="button"
+              class="operation"
+              data-operator="divide"
+              title="Dividir"
+            >
               /
             </button>
-            <button type="button" class="operation" data-operator="square-root">
+            <button
+              type="button"
+              class="operation"
+              data-operator="square-root"
+              title="Raíz quadrada do número atual"
+            >
               sqrt
             </button>
-            <button type="button" class="operation" data-operator="multiply">
+            <button
+              type="button"
+              class="operation"
+              data-operator="multiply"
+              title="Multiplicar"
+            >
               *
             </button>
             <button
               type="button"
               class="operation"
               data-operator="percentage"
+              title="Porcento"
               disabled
             >
               %
             </button>
-            <button type="button" class="operation" data-operator="subtract">
+            <button
+              type="button"
+              class="operation"
+              data-operator="subtract"
+              title="Subtrair"
+            >
               -
             </button>
-            <button type="button" class="operation" data-operator="one-over">
+            <button
+              type="button"
+              class="operation"
+              data-operator="one-over"
+              title="Divide 1 pelo número atual"
+            >
               1/x
             </button>
-            <button type="button" class="operation" data-operator="sum">
+            <button
+              type="button"
+              class="operation"
+              data-operator="sum"
+              title="Somar"
+            >
               +
             </button>
-            <button type="button" class="operation" data-operator="equals">
+            <button
+              type="button"
+              class="operation"
+              data-operator="equals"
+              title="Igual"
+            >
               =
             </button>
           </div>
