@@ -5,6 +5,7 @@ const DEFAULTS = {
   RESULT: null,
   CURRENT_NUMBER: 0,
   IS_FLOAT: false,
+  MEMORY: 0,
 };
 
 let leftNumber = DEFAULTS.LEFT_NUMBER;
@@ -15,6 +16,8 @@ let result = DEFAULTS.RESULT;
 let currentNumber = DEFAULTS.CURRENT_NUMBER;
 let isFloat = DEFAULTS.IS_FLOAT;
 
+let memory = DEFAULTS.MEMORY;
+
 const numbersBtns = document.querySelectorAll(".number");
 const switchSignBtn = document.querySelector(".switch-sign");
 const pointBtn = document.querySelector(".point");
@@ -23,6 +26,7 @@ const clearEntryBtn = document.querySelector(".clear-entry");
 const backspaceBtn = document.querySelector(".backspace");
 const operationsBtns = document.querySelectorAll(".operation");
 const percentageBtn = document.querySelector("[data-operator='percentage']");
+const memoryBtns = document.querySelectorAll(".memory");
 
 window.onload = updateDisplay;
 window.onkeydown = handleKeyDown;
@@ -39,6 +43,28 @@ operationsBtns.forEach((btn) =>
     handleOperationButton(e.target.getAttribute("data-operator"))
   )
 );
+memoryBtns.forEach((btn) => btn.addEventListener("click", handleMemoryButton));
+
+function handleMemoryButton(e) {
+  const action = e.target.getAttribute("data-memory-action");
+
+  switch (action) {
+    case "clear":
+      memory = DEFAULTS.MEMORY;
+      break;
+    case "recall":
+      if (result !== DEFAULTS.RESULT) handleClear();
+      currentNumber = memory;
+      updateDisplay();
+      break;
+    case "store":
+      memory = result !== DEFAULTS.RESULT ? result : currentNumber;
+      break;
+    case "sum":
+      memory += result !== DEFAULTS.RESULT ? result : currentNumber;
+      break;
+  }
+}
 
 function updateDisplay() {
   toggleSqrtBtn();
