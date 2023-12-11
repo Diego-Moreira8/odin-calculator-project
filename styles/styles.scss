@@ -23,9 +23,6 @@ body {
 
   .window {
     position: absolute;
-    left: 50%;
-    top: 2rem;
-    transform: translateX(-50%);
 
     background-color: #e7e9d2;
     border: 3px solid $window-border-dark-tone;
@@ -48,7 +45,7 @@ body {
 
         $title-size: 1rem;
 
-        .calculator-icon {
+        .window-icon {
           height: $title-size;
         }
 
@@ -171,6 +168,25 @@ body {
     }
   }
 
+  .calculator {
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+  }
+
+  .about {
+    left: 3rem;
+    bottom: 4rem;
+
+    p {
+      margin: 0;
+    }
+
+    .window-content {
+      padding: 1rem 2rem;
+    }
+  }
+
   .taskbar {
     position: absolute;
     bottom: 0;
@@ -208,6 +224,10 @@ body {
         margin: 2px 0.1rem;
         padding: 0 1rem;
         border-radius: 0.25rem;
+
+        &:hover {
+          background-color: #ffffff53;
+        }
 
         img {
           height: 1rem;

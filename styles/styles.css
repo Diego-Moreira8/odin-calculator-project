@@ -13,9 +13,6 @@ body button {
 }
 body .window {
   position: absolute;
-  left: 50%;
-  top: 2rem;
-  transform: translateX(-50%);
   background-color: #e7e9d2;
   border: 3px solid #0065cd;
   border-radius: 0.5rem 0.5rem 0 0;
@@ -35,7 +32,7 @@ body .window .window-header .title-wrap {
   gap: 0.25rem;
   align-items: center;
 }
-body .window .window-header .title-wrap .calculator-icon {
+body .window .window-header .title-wrap .window-icon {
   height: 1rem;
 }
 body .window .window-header .title-wrap h1 {
@@ -134,6 +131,21 @@ body .window .window-content .calc-btns .operations-btns {
   grid-column: 6/8;
   grid-row: 2/6;
 }
+body .calculator {
+  left: 50%;
+  top: 2rem;
+  transform: translateX(-50%);
+}
+body .about {
+  left: 3rem;
+  bottom: 4rem;
+}
+body .about p {
+  margin: 0;
+}
+body .about .window-content {
+  padding: 1rem 2rem;
+}
 body .taskbar {
   position: absolute;
   bottom: 0;
@@ -168,6 +180,9 @@ body .taskbar .buttons .window-button {
   margin: 2px 0.1rem;
   padding: 0 1rem;
   border-radius: 0.25rem;
+}
+body .taskbar .buttons .window-button:hover {
+  background-color: rgba(255, 255, 255, 0.3254901961);
 }
 body .taskbar .buttons .window-button img {
   height: 1rem;
