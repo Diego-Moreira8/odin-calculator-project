@@ -28,26 +28,22 @@ body .window .window-header {
 }
 body .window .window-header .title-wrap {
   display: flex;
-  gap: 0.2rem;
+  gap: 0.25rem;
+  align-items: center;
+}
+body .window .window-header .title-wrap .calculator-icon {
+  height: 1rem;
 }
 body .window .window-header .title-wrap h1 {
   font-size: 1rem;
   margin: 0;
 }
-body .window .window-header .window-controls button {
-  width: 1.5rem;
-  height: 1.5rem;
-  border: 2px solid white;
+body .window .window-header .window-controls img {
+  width: 1.25rem;
+  height: 1.25rem;
+  border: 1.5px solid white;
+  border-radius: 0.25rem;
   padding: 0;
-  color: white;
-  font-weight: bold;
-}
-body .window .window-header .minimize,
-body .window .window-header .maximize {
-  background-color: #0065cd;
-}
-body .window .window-header .close {
-  background-color: #c13e0d;
 }
 body .window .window-content {
   padding: 0.5rem;

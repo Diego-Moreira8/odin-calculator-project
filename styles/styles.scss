@@ -1,8 +1,6 @@
 $window-border-dark-tone: #0065cd;
 $window-border-medium-tone: #0465ff;
 $window-border-light-tone: #2a8aff;
-$app-bgc: #e7e9d2;
-$danger: #c13e0d;
 
 body {
   font-family: sans-serif;
@@ -18,7 +16,7 @@ body {
   }
 
   .window {
-    background-color: $app-bgc;
+    background-color: #e7e9d2;
     border: 3px solid $window-border-dark-tone;
     border-radius: 0.5rem 0.5rem 0 0;
     margin: 0 auto;
@@ -39,31 +37,28 @@ body {
 
       .title-wrap {
         display: flex;
-        gap: 0.2rem;
+        gap: 0.25rem;
+        align-items: center;
+
+        $title-size: 1rem;
+
+        .calculator-icon {
+          height: $title-size;
+        }
 
         h1 {
-          font-size: 1rem;
+          font-size: $title-size;
           margin: 0;
         }
       }
 
-      .window-controls button {
-        $size: 1.5rem;
+      .window-controls img {
+        $size: 1.25rem;
         width: $size;
         height: $size;
-        border: 2px solid white;
+        border: 1.5px solid white;
+        border-radius: 0.25rem;
         padding: 0;
-        color: white;
-        font-weight: bold;
-      }
-
-      .minimize,
-      .maximize {
-        background-color: $window-border-dark-tone;
-      }
-
-      .close {
-        background-color: $danger;
       }
     }
 
