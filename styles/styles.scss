@@ -106,9 +106,18 @@ body {
         justify-items: stretch;
 
         button {
-          background-color: white;
+          background: linear-gradient(#fff 0%, #fbfbfb 20%, #ebebeb 100%);
           border: 1px solid black;
           height: 2rem;
+          &:hover {
+            background: #fff;
+          }
+          &:active {
+            background: #ebebeb;
+          }
+          &:disabled {
+            background: #ebebeb;
+          }
         }
 
         $buttons-gap: 0.25rem;
@@ -122,7 +131,7 @@ body {
         }
 
         .clear-btns {
-          grid-template-columns: repeat(4, 1fr);
+          grid-template-columns: auto repeat(3, 1fr);
           grid-column: 1 / -1;
           grid-row: 1 / 2;
 
