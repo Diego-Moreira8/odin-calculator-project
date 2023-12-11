@@ -1,9 +1,10 @@
 body {
-  font-family: sans-serif;
-  margin: 0;
-  padding-top: 1rem;
-  height: calc(100vh - 1rem);
   background: center/cover no-repeat url("../images/win-xp-wallpaper.webp");
+  position: relative;
+  margin: 0;
+  height: 100vh;
+  font-family: sans-serif;
+  cursor: default;
 }
 body button {
   font-size: 1rem;
@@ -11,10 +12,13 @@ body button {
   font-family: inherit;
 }
 body .window {
+  position: absolute;
+  left: 50%;
+  top: 2rem;
+  transform: translateX(-50%);
   background-color: #e7e9d2;
   border: 3px solid #0065cd;
   border-radius: 0.5rem 0.5rem 0 0;
-  margin: 0 auto;
   max-width: 250px;
 }
 body .window .window-header {
@@ -129,6 +133,49 @@ body .window .window-content .calc-btns .operations-btns {
   grid-template-columns: repeat(2, 1fr);
   grid-column: 6/8;
   grid-row: 2/6;
+}
+body .taskbar {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(#2a8aff 0%, #0065cd 20%, #0465ff 100%);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+}
+body .taskbar .buttons {
+  display: flex;
+}
+body .taskbar .buttons .start-menu {
+  background: linear-gradient(#8ccc8c 0%, #399939 20%, #247024 100%);
+  padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  font-style: italic;
+  font-weight: bold;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+body .taskbar .buttons .start-menu img {
+  height: 1rem;
+}
+body .taskbar .buttons .window-button {
+  background-color: rgba(255, 255, 255, 0.2392156863);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2px 0.1rem;
+  padding: 0 1rem;
+  border-radius: 0.25rem;
+}
+body .taskbar .buttons .window-button img {
+  height: 1rem;
+  margin-right: 0.2rem;
+}
+body .taskbar .clock {
+  background-color: rgba(255, 255, 255, 0.2392156863);
+  padding: 0.25rem 1rem;
 }
 
 /*# sourceMappingURL=styles.css.map */

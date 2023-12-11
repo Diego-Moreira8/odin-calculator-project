@@ -1,13 +1,19 @@
 $window-border-dark-tone: #0065cd;
 $window-border-medium-tone: #0465ff;
 $window-border-light-tone: #2a8aff;
+$window-border-background: linear-gradient(
+  $window-border-light-tone 0%,
+  $window-border-dark-tone 20%,
+  $window-border-medium-tone 100%
+);
 
 body {
-  font-family: sans-serif;
-  margin: 0;
-  padding-top: 1rem;
-  height: calc(100vh - 1rem);
   background: center / cover no-repeat url("../images/win-xp-wallpaper.webp");
+  position: relative;
+  margin: 0;
+  height: 100vh;
+  font-family: sans-serif;
+  cursor: default;
 
   button {
     font-size: 1rem;
@@ -16,18 +22,18 @@ body {
   }
 
   .window {
+    position: absolute;
+    left: 50%;
+    top: 2rem;
+    transform: translateX(-50%);
+
     background-color: #e7e9d2;
     border: 3px solid $window-border-dark-tone;
     border-radius: 0.5rem 0.5rem 0 0;
-    margin: 0 auto;
     max-width: 250px;
 
     .window-header {
-      background: linear-gradient(
-        $window-border-light-tone 0%,
-        $window-border-dark-tone 20%,
-        $window-border-medium-tone 100%
-      );
+      background: $window-border-background;
       color: white;
       display: flex;
       justify-content: space-between;
@@ -162,6 +168,57 @@ body {
           grid-row: 2 / 6;
         }
       }
+    }
+  }
+
+  .taskbar {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+
+    background: $window-border-background;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+
+    .buttons {
+      display: flex;
+
+      .start-menu {
+        background: linear-gradient(#8ccc8c 0%, #399939 20%, #247024 100%);
+        padding: 0.25rem 0.75rem 0.25rem 0.25rem;
+        border-radius: 0 0.75rem 0.75rem 0;
+        font-style: italic;
+        font-weight: bold;
+        margin-right: 0.5rem;
+        display: flex;
+        align-items: center;
+
+        img {
+          height: 1rem;
+        }
+      }
+
+      .window-button {
+        background-color: #ffffff3d;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 2px 0.1rem;
+        padding: 0 1rem;
+        border-radius: 0.25rem;
+
+        img {
+          height: 1rem;
+          margin-right: 0.2rem;
+        }
+      }
+    }
+
+    .clock {
+      background-color: #ffffff3d;
+      padding: 0.25rem 1rem;
     }
   }
 }
