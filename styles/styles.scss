@@ -29,6 +29,10 @@ body {
     border-radius: 0.5rem 0.5rem 0 0;
     max-width: 250px;
 
+    &.hidden {
+      display: none;
+    }
+
     .window-header {
       background: $window-border-background;
       color: white;

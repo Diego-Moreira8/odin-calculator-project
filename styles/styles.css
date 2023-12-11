@@ -18,6 +18,9 @@ body .window {
   border-radius: 0.5rem 0.5rem 0 0;
   max-width: 250px;
 }
+body .window.hidden {
+  display: none;
+}
 body .window .window-header {
   background: linear-gradient(#2a8aff 0%, #0065cd 20%, #0465ff 100%);
   color: white;
