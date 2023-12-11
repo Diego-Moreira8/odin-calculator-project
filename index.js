@@ -68,6 +68,7 @@ function handleMemoryButton(e) {
 
 function updateDisplay() {
   toggleSqrtBtn();
+  toggleDeleteAndCEBtn();
 
   const leftNumberDisplay = document.querySelector(".left-number");
   const currOperatorDisplay = document.querySelector(".current-operator");
@@ -199,13 +200,21 @@ function handleSwitchSign() {
   updateDisplay();
 }
 
+function toggleDeleteAndCEBtn() {
+  [backspaceBtn, clearEntryBtn].forEach(
+    (btn) => (btn.disabled = currentNumber === 0 || result !== DEFAULTS.RESULT)
+  );
+}
+
 function toggleSwitchSignBtn() {
   switchSignBtn.disabled = currentNumber === 0;
 }
 
 function togglePercentageBtn() {
   percentageBtn.disabled =
-    rightNumber !== DEFAULTS.RIGHT_NUMBER || result !== DEFAULTS.RESULT;
+    leftNumber === DEFAULTS.LEFT_NUMBER ||
+    rightNumber !== DEFAULTS.RIGHT_NUMBER ||
+    result !== DEFAULTS.RESULT;
 }
 
 function toggleSqrtBtn() {
